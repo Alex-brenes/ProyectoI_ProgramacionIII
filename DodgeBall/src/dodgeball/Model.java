@@ -16,7 +16,7 @@ public class Model extends Observable {
     public Model() {
         this.raqueta = new Raqueta(300, 300, 10, 10, 150, 100);
         this.bola = new Bola(100, 100, 10, 10, 25);
-        this.circunferencia = new Circunferencia(0, 0, 500);
+        this.circunferencia = new Circunferencia(8, 31, 250);
     }
     
     @Override

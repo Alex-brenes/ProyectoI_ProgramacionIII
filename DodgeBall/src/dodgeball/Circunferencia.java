@@ -11,9 +11,9 @@ public class Circunferencia {
     private int coordenada_y;
     private int radio;
     
-    public Circunferencia(int coordenda_x, int coordenda_y, int radio) {
-        this.coordenada_x = coordenda_x;
-        this.coordenada_y = coordenda_y;
+    public Circunferencia(int coordenada_x, int coordenada_y, int radio) {
+        this.coordenada_x = coordenada_x;
+        this.coordenada_y = coordenada_y;
         this.radio = radio;
     }
     public Circunferencia(){
@@ -22,6 +22,16 @@ public class Circunferencia {
     public Circunferencia(int coordenada_x) {
         //Mismo punto
         this(coordenada_x, coordenada_x, 100);
+    }
+    
+    public int getCoordenada_x(){
+        return this.coordenada_x;
+    }
+    public int getCoordenada_y(){
+        return this.coordenada_y;
+    }
+    public int getRadio(){
+        return this.radio;
     }
     
 }

@@ -8,8 +8,20 @@ package dodgeball;
 
 public class DodgeBall {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
+        Model model = new Model();
+        View view = new View();
+        Controller controller = new Controller(model, view);
+        view.setVisible(true);
+        for (;;) {
+            try {
+                Thread.sleep(40);
+            } catch (InterruptedException e) {
+
+            }
+        }
+        
     }
-    
+
 }
