@@ -14,12 +14,13 @@ public class Raqueta extends Actor {
         this.base = base;
         this.altura = altura;
     }
-    
+    @Override
     public void movimiento(Model model){
         
         
         
     }
+
     
     public int getBase(){
         return this.base;

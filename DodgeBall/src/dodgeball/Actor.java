@@ -19,6 +19,7 @@ public abstract class Actor {
     }
     
     public abstract void movimiento(Model model);
+
     
     public int getCoordenada_x(){
         return this.coordenada_x;

@@ -34,4 +34,16 @@ public class Circunferencia {
         return this.radio;
     }
     
+    public int centro_x(){
+        return this.getCoordenada_x() + radio;
+    }
+    public int centro_y(){
+        return this.getCoordenada_y() + radio; 
+    }
+    
+    public double area(){
+        return 2 * Math.PI * this.radio;
+    }
+    
+    
 }

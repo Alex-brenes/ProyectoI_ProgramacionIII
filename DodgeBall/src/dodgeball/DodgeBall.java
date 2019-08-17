@@ -15,8 +15,9 @@ public class DodgeBall {
         Controller controller = new Controller(model, view);
         view.setVisible(true);
         for (;;) {
+            model.avanzar();
             try {
-                Thread.sleep(40);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
 
             }
