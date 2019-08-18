@@ -4,18 +4,21 @@
 
 package dodgeball;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 public class Model extends Observable {
     
     private final Raqueta raqueta;
-    private final Bola bola;
+    private final List<Bola> lista_bolas;
     private final Circunferencia circunferencia;
     
     public Model() {
-        this.raqueta = new Raqueta(300, 300, 10, 10, 150, 100);
-        this.bola = new Bola(150, 200, 10, 10, 25);
+        this.raqueta = new Raqueta(200, 300, 10, 10, 150, 50);
+        this.lista_bolas = new ArrayList<Bola>();
+        lista_bolas.add(new Bola( 150, 200, 10, -10, 15/*25*/));
         this.circunferencia = new Circunferencia(8, 31, 250);
     }
     
@@ -27,7 +30,11 @@ public class Model extends Observable {
     }
     
     public void avanzar(){
-        bola.movimiento(this);
+        
+        for(Bola b : this.lista_bolas){
+            b.movimiento(this);
+        }
+        this.raqueta.movimiento(this);
         this.setChanged();
         this.notifyObservers();
     }
@@ -36,8 +43,8 @@ public class Model extends Observable {
         return this.raqueta;
     }
     
-    public Bola getBola(){
-        return this.bola;
+    public List<Bola> getListaBolas(){
+        return this.lista_bolas;
     }
     
     public Circunferencia getCircunferencia(){

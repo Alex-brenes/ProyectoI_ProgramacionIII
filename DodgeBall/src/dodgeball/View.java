@@ -40,20 +40,40 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     public void dibujarModelo(Model model, java.awt.Graphics graphics) {
         dibujarCircunferencia(model.getCircunferencia(), graphics);
-        dibujarBola(model.getBola(), graphics);
+        for(Bola b : model.getListaBolas()){
+            dibujarBola(b,graphics);
+        }
+        dibujarRaqueta(model.getRaqueta(),graphics);
+        //dibujarBola(model.getBola(), graphics);
     }
 
     private void dibujarCircunferencia(Circunferencia circunferencia, java.awt.Graphics graphics) {
+        int x = circunferencia.getCoordenada_x();
+        int y = circunferencia.getCoordenada_y();
+        int r = circunferencia.getRadio();
         graphics.setColor(java.awt.Color.BLACK);
         graphics.drawOval(circunferencia.getCoordenada_x()/*WIDTH/2 - circunferencia.getRadio()*/, circunferencia.getCoordenada_y()/*HEIGHT/2 - circunferencia.getRadio()*/, circunferencia.getRadio() * 2, circunferencia.getRadio() * 2);
+        graphics.setColor(java.awt.Color.RED);
+        graphics.drawLine(x + r, y,x + r, y + 2 * r);
+        graphics.drawLine(x, y + r,x + 2 * r, y + r);
     }
 
     private void dibujarBola(Bola bola, java.awt.Graphics graphics) {
         graphics.setColor(java.awt.Color.PINK);
         graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getRadio() * 2, bola.getRadio() * 2);
+        graphics.setColor(java.awt.Color.BLUE);
+        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), 10, 10);
+        graphics.fillOval(bola.getCoordenada_x() + 10 * 2/*4*/, bola.getCoordenada_y(), 10, 10);
+        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y() + 10 * 2/*4*/, 10, 10);
+        graphics.fillOval(bola.getCoordenada_x() + 10 * 2/*4*/, bola.getCoordenada_y() + 10 * 2/*4*/, 10, 10);
+    }
+    
+    private void dibujarRaqueta(Raqueta raqueta,java.awt.Graphics graphics){
+        graphics.setColor(java.awt.Color.magenta);
+        graphics.drawRect(raqueta.getCoordenada_x(),raqueta.getCoordenada_y(),raqueta.getBase(),raqueta.getAltura());
     }
 
-    final int WIDTH= 590;
-    final int HEIGHT = 590;
+    private final int WIDTH = 590;
+    private final int HEIGHT = 590;
     
 }
