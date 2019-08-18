@@ -17,4 +17,14 @@ public class Controller {
         view.setModel(this.model);
     }
     
+        public void mover(int flecha){
+        model.mover(flecha);
+    }
+    public void detenerVer(){
+        model.detenerVer();
+    }
+    public void detenerHor(){
+        model.detenerHor();
+    }
+    
 }

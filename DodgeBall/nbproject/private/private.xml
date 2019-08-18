@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/pc/Documents/Universidad/Nivel%20II%20-%20Ciclo%20II/Programación%20III/Proyectos/ProyectoI_ProgramacionIII/DodgeBall/src/dodgeball/Actor.java</file>
-            <file>file:/C:/Users/pc/Documents/Universidad/Nivel%20II%20-%20Ciclo%20II/Programación%20III/Proyectos/ProyectoI_ProgramacionIII/DodgeBall/src/dodgeball/Circunferencia.java</file>
             <file>file:/C:/Users/pc/Documents/Universidad/Nivel%20II%20-%20Ciclo%20II/Programación%20III/Proyectos/ProyectoI_ProgramacionIII/DodgeBall/src/dodgeball/View.java</file>
             <file>file:/C:/Users/pc/Documents/Universidad/Nivel%20II%20-%20Ciclo%20II/Programación%20III/Proyectos/ProyectoI_ProgramacionIII/DodgeBall/src/dodgeball/Model.java</file>
-            <file>file:/C:/Users/pc/Documents/Universidad/Nivel%20II%20-%20Ciclo%20II/Programación%20III/Proyectos/ProyectoI_ProgramacionIII/DodgeBall/src/dodgeball/Bola.java</file>
             <file>file:/C:/Users/pc/Documents/Universidad/Nivel%20II%20-%20Ciclo%20II/Programación%20III/Proyectos/ProyectoI_ProgramacionIII/DodgeBall/src/dodgeball/Raqueta.java</file>
+            <file>file:/C:/Users/pc/Documents/Universidad/Nivel%20II%20-%20Ciclo%20II/Programación%20III/Proyectos/ProyectoI_ProgramacionIII/DodgeBall/src/dodgeball/DodgeBall.java</file>
+            <file>file:/C:/Users/pc/Documents/Universidad/Nivel%20II%20-%20Ciclo%20II/Programación%20III/Proyectos/ProyectoI_ProgramacionIII/DodgeBall/src/dodgeball/Controller.java</file>
         </group>
     </open-files>
 </project-private>
