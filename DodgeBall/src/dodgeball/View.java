@@ -4,11 +4,13 @@
 package dodgeball;
 
 import java.awt.Color;
-import java.awt.MenuBar;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class View extends javax.swing.JFrame implements java.util.Observer {
@@ -43,8 +45,36 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         JMenuBar menu_bar = new JMenuBar();
         this.setJMenuBar(menu_bar);
         JMenu file = new JMenu("File");
+        JMenuItem settings = new JMenuItem("Settings");
         JMenu edit = new JMenu("Edit");
+        edit.add(settings);
         JMenu about = new JMenu("About");
+        
+        JMenuItem aboutDB = new JMenuItem("DodgeBall");
+        settings.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                javax.swing.JOptionPane.showInputDialog(null,settingsOP , "Settings",javax.swing.JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        aboutDB.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                javax.swing.JOptionPane.showMessageDialog(null, aboutInfo, "About", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        });
+        aboutDB.setSize(0, 10000);
+        JMenuItem exit = new JMenuItem("Exit",new ImageIcon("imagenes/salir.gif"));
+        exit.addActionListener(new  java.awt.event.ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+            
+        });
+        about.add(aboutDB);
+        file.add(exit);
         menu_bar.add(file);
         menu_bar.add(edit);
         menu_bar.add(about);
@@ -156,5 +186,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     private final int WIDTH = 590;
     private final int HEIGHT = 590;
-
+    private final String settingsOP = "Esferas:";
+    private final String aboutInfo = "\t\tDodgeBall\nProgramación III. Proyecto I.\nAutores:\n\tJosé Alexander Brenes Brenes.\n\tJuan Daniel Quirós"; 
 }
