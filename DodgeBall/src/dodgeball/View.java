@@ -3,7 +3,13 @@
 // Métodos para la visualización del juego
 package dodgeball;
 
+import java.awt.Color;
+import java.awt.MenuBar;
 import java.awt.event.KeyEvent;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 
 public class View extends javax.swing.JFrame implements java.util.Observer {
 
@@ -12,9 +18,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     public View() {
         super("Dodge Ball");
-        this.setSize(WIDTH, HEIGHT);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        iniciarFrame();
+        
         this.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -24,6 +29,27 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 formKeyReleased(evt);
             }
         });
+    }
+    
+    private void iniciarFrame(){
+        JPanel panel= new JPanel();
+        panel.setBackground(Color.LIGHT_GRAY);
+        this.getContentPane().add(panel);
+        this.setSize(WIDTH, HEIGHT);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        
+        JMenuBar menu_bar = new JMenuBar();
+        this.setJMenuBar(menu_bar);
+        JMenu file = new JMenu("File");
+        JMenu edit = new JMenu("Edit");
+        JMenu about = new JMenu("About");
+        menu_bar.add(file);
+        menu_bar.add(edit);
+        menu_bar.add(about);
+        JLabel etiqueta = new JLabel("DodgeBall");
+        panel.add(etiqueta);
     }
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {
@@ -50,18 +76,18 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     private void formKeyReleased(java.awt.event.KeyEvent evt) {
         int key = evt.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_LEFT: {
-                controller.detenerHor();
-            }
-            case KeyEvent.VK_RIGHT: {
-                controller.detenerHor();
-                break;
-            }
             case KeyEvent.VK_UP: {
                 controller.detenerHor();
             }
             case KeyEvent.VK_DOWN: {
                 controller.detenerVer();
+                break;
+            }
+            case KeyEvent.VK_LEFT: {
+                controller.detenerHor();
+            }
+            case KeyEvent.VK_RIGHT: {
+                controller.detenerHor();
                 break;
             }
         }
@@ -113,10 +139,14 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         graphics.setColor(java.awt.Color.PINK);
         graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getRadio() * 2, bola.getRadio() * 2);
         graphics.setColor(java.awt.Color.BLUE);
-        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), 10, 10);
-        graphics.fillOval(bola.getCoordenada_x() + 10 * 2/*4*/, bola.getCoordenada_y(), 10, 10);
-        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y() + 10 * 2/*4*/, 10, 10);
-        graphics.fillOval(bola.getCoordenada_x() + 10 * 2/*4*/, bola.getCoordenada_y() + 10 * 2/*4*/, 10, 10);
+        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y());
+        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() , bola.getCoordenada_y()+ bola.getRadio() * 2);
+        graphics.drawLine(bola.getCoordenada_x() , bola.getCoordenada_y()+ bola.getRadio() * 2, bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y()+ bola.getRadio() * 2);
+        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y(),bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y()+ bola.getRadio() * 2);
+//        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), 10, 10);
+//        graphics.fillOval(bola.getCoordenada_x() + 10 * 2/*4*/, bola.getCoordenada_y(), 10, 10);
+//        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y() + 10 * 2/*4*/, 10, 10);
+//        graphics.fillOval(bola.getCoordenada_x() + 10 * 2/*4*/, bola.getCoordenada_y() + 10 * 2/*4*/, 10, 10);
     }
 
     private void dibujarRaqueta(Raqueta raqueta, java.awt.Graphics graphics) {

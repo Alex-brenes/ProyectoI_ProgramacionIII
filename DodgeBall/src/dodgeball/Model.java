@@ -15,10 +15,10 @@ public class Model extends Observable {
     private final Circunferencia circunferencia;
 
     public Model() {
-        this.raqueta = new Raqueta(150, 100, 10, 20, 150, 50);
+        this.raqueta = new Raqueta(246, 291, 10, 10, 100, 40);
         this.lista_bolas = new ArrayList<Bola>();
-        lista_bolas.add(new Bola(150, 200, 10, -10, 15/*25*/));
-        this.circunferencia = new Circunferencia(8, 31, 250);
+        lista_bolas.add(new Bola(251, 201, 10, 10, 15/*25*/));
+        this.circunferencia = new Circunferencia(45, 80, 250);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Model extends Observable {
     }
 
     public void iniciar() {
-        final int mili_segundos = 20;
+        final int mili_segundos = 42;
         Runnable code = new Runnable() {
             public void run() {
                 while (true) {

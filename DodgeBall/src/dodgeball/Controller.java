@@ -14,7 +14,7 @@ public class Controller {
         this.model = model;
         this.view = view;
         view.setController(this);
-        view.setModel(this.model);
+        view.setModel(model);
     }
     
         public void mover(int flecha){
