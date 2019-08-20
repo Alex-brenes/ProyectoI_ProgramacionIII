@@ -12,6 +12,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class View extends javax.swing.JFrame implements java.util.Observer {
 
@@ -54,7 +55,10 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         settings.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                javax.swing.JOptionPane.showInputDialog(null,settingsOP , "Settings",javax.swing.JOptionPane.PLAIN_MESSAGE);
+                JTextField esferasOP = new JTextField("1");
+                JTextField velocidadOP = new JTextField("1");
+                Object[] message = {"Esferas:",esferasOP,"Velocidad:",velocidadOP};
+                javax.swing.JOptionPane.showConfirmDialog(null,message, "Settings",javax.swing.JOptionPane.OK_CANCEL_OPTION);
             }
         });
         aboutDB.addActionListener(new java.awt.event.ActionListener() {
