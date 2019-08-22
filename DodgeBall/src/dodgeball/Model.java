@@ -1,5 +1,6 @@
 // Raqueta.java 
 // Autor: José Alexander Brenes Brenes
+//        Juan Daniel Quirós
 // Reúne los modelos del juego y administra sus operaciones
 package dodgeball;
 
@@ -15,9 +16,9 @@ public class Model extends Observable {
     private final Circunferencia circunferencia;
 
     public Model() {
-        this.raqueta = new Raqueta(246, 291, 0, 0, 100, 40);
+        this.raqueta = new Raqueta(246, 301, 0, 0, 100, 40);
         this.lista_bolas = new ArrayList<Bola>();
-        lista_bolas.add(new Bola(251, 201, 10, 10, 15/*25*/));
+        lista_bolas.add(new Bola(301, 261, 10, -10, 15/*25*/));
         this.circunferencia = new Circunferencia(45, 80, 250);
     }
 

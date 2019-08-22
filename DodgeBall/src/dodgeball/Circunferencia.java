@@ -1,5 +1,6 @@
 // Circunferencia.java 
 // Autor: José Alexander Brenes Brenes
+//        Juan Daniel Quirós
 // Funciona como delimitador para los modelos del juego (bola y raqueta).
 // Además establece áreas en dónde obtener o perder puntos.
 

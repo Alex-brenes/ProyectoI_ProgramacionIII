@@ -1,5 +1,6 @@
 // Controller.java 
 // Autor: José Alexander Brenes Brenes
+//        Juan Daniel Quirós
 // Permite establecer un control de los modelos así como
 // punto de intercambio de información entre Model y View
 

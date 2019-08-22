@@ -1,5 +1,6 @@
 // View.java 
 // Autor: José Alexander Brenes Brenes
+//        Juan Daniel Quirós
 // Métodos para la visualización del juego
 package dodgeball;
 
@@ -22,7 +23,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     public View() {
         super("Dodge Ball");
         iniciarFrame();
-        
+
         this.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -33,16 +34,16 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             }
         });
     }
-    
-    private void iniciarFrame(){
-        JPanel panel= new JPanel();
+
+    private void iniciarFrame() {
+        JPanel panel = new JPanel();
         panel.setBackground(Color.LIGHT_GRAY);
         this.getContentPane().add(panel);
         this.setSize(WIDTH, HEIGHT);
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        
+
         JMenuBar menu_bar = new JMenuBar();
         this.setJMenuBar(menu_bar);
         JMenu file = new JMenu("File");
@@ -50,15 +51,15 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         JMenu edit = new JMenu("Edit");
         edit.add(settings);
         JMenu about = new JMenu("About");
-        
+
         JMenuItem aboutDB = new JMenuItem("DodgeBall");
         settings.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JTextField esferasOP = new JTextField("1");
                 JTextField velocidadOP = new JTextField("1");
-                Object[] message = {"Esferas:",esferasOP,"Velocidad:",velocidadOP};
-                javax.swing.JOptionPane.showConfirmDialog(null,message, "Settings",javax.swing.JOptionPane.OK_CANCEL_OPTION);
+                Object[] message = {"Esferas:", esferasOP, "Velocidad:", velocidadOP};
+                javax.swing.JOptionPane.showConfirmDialog(null, message, "Settings", javax.swing.JOptionPane.OK_CANCEL_OPTION);
             }
         });
         aboutDB.addActionListener(new java.awt.event.ActionListener() {
@@ -69,13 +70,13 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
         });
         aboutDB.setSize(0, 10000);
-        JMenuItem exit = new JMenuItem("Exit",new ImageIcon("imagenes/salir.gif"));
-        exit.addActionListener(new  java.awt.event.ActionListener(){
+        JMenuItem exit = new JMenuItem("Exit", new ImageIcon("imagenes/salir.gif"));
+        exit.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
-            
+
         });
         about.add(aboutDB);
         file.add(exit);
@@ -167,6 +168,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         graphics.setColor(java.awt.Color.RED);
         graphics.drawLine(x + r, y, x + r, y + 2 * r);
         graphics.drawLine(x, y + r, x + 2 * r, y + r);
+
     }
 
     private void dibujarBola(Bola bola, java.awt.Graphics graphics) {
@@ -174,13 +176,12 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getRadio() * 2, bola.getRadio() * 2);
         graphics.setColor(java.awt.Color.BLUE);
         graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y());
-        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() , bola.getCoordenada_y()+ bola.getRadio() * 2);
-        graphics.drawLine(bola.getCoordenada_x() , bola.getCoordenada_y()+ bola.getRadio() * 2, bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y()+ bola.getRadio() * 2);
-        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y(),bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y()+ bola.getRadio() * 2);
-//        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), 10, 10);
-//        graphics.fillOval(bola.getCoordenada_x() + 10 * 2/*4*/, bola.getCoordenada_y(), 10, 10);
-//        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y() + 10 * 2/*4*/, 10, 10);
-//        graphics.fillOval(bola.getCoordenada_x() + 10 * 2/*4*/, bola.getCoordenada_y() + 10 * 2/*4*/, 10, 10);
+        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2);
+        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2, bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
+        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
+
+        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio(), bola.getCoordenada_y() + bola.getRadio(), 295, 330);
+
     }
 
     private void dibujarRaqueta(Raqueta raqueta, java.awt.Graphics graphics) {
@@ -191,5 +192,5 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     private final int WIDTH = 590;
     private final int HEIGHT = 590;
     private final String settingsOP = "Esferas:";
-    private final String aboutInfo = "\t\tDodgeBall\nProgramación III. Proyecto I.\nAutores:\n\tJosé Alexander Brenes Brenes.\n\tJuan Daniel Quirós"; 
+    private final String aboutInfo = "\t\tDodgeBall\nProgramación III. Proyecto I.\nAutores:\n\tJosé Alexander Brenes Brenes.\n\tJuan Daniel Quirós";
 }

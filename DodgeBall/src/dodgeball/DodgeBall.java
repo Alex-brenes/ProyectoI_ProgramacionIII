@@ -1,5 +1,6 @@
 // DodgeBall.java 
 // Autor: José Alexander Brenes Brenes
+//        Juan Daniel Quirós
 // El programa consiste en un juego en el que se controla el rebote de una
 // bola con una raqueta, para así obtener o perder puntos si rebota en las zonas
 // definidas.
@@ -17,7 +18,7 @@ public class DodgeBall {
         for (;;) {
             model.avanzar();
             try {
-                Thread.sleep(300);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
 
             }

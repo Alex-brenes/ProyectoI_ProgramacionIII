@@ -1,5 +1,6 @@
 // Actor.java 
 // Autor: José Alexander Brenes Brenes
+//        Juan Daniel Quirós
 // Super-clase para los modelos del juego
 
 package dodgeball;
