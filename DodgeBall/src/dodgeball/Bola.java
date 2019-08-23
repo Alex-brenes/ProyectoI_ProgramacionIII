@@ -63,10 +63,12 @@ public class Bola extends Actor {
                             this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
                         } else { //Si no, se cambia la dirección
                             nuevaDireccion(model, S_II);
-                            this.setDireccion_x(this.getDireccion_x() * (-1));
-                            this.setDireccion_y(this.getDireccion_y() * (-1));
+//                            this.setDireccion_x(this.getDireccion_x() * (-1));
+//                            this.setDireccion_y(this.getDireccion_y() * (-1));
+                            System.out.println("xPos: " + this.getCoordenada_x());
                             this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
                             this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
+                            System.out.println(this.getCoordenada_x());
                         }
                         break;
                     }
@@ -114,142 +116,152 @@ public class Bola extends Actor {
         double angle = 0.0;
         Random randNum = new Random(System.currentTimeMillis());
         System.out.println(theta);
-        
-        
-            //	Right side of boundary
-            if (this.getCoordenada_x() > circ_x) {
 
-                //	Quadrant 4
-                if (this.getCoordenada_y() >circ_y) {
+        //	Right side of boundary
+        if (this.getCoordenada_x() > circ_x) {
 
-                    //	Sub Q 13
-                    if (this.getCoordenada_y() - circ_y > Math.sin(3 * Math.PI / 8)) {
+            //	Quadrant 4
+            if (this.getCoordenada_y() > circ_y) {
 
-                        angle = (double) (randNum.nextInt(90) + 90);
+                //	Sub Q 13
+                if (this.getCoordenada_y() - circ_y > Math.sin(3 * Math.PI / 8)) {
+                    System.out.println("q13");
+                    angle = (double) (randNum.nextInt(90) + 90);
 
-                    } //	Sub Q 14
-                    else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 4)) {
+                } //	Sub Q 14
+                else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 4)) {
+                    System.out.println("q14");
+                    angle = (double) (randNum.nextInt(300 - 200 + 1) + 200);
 
-                        angle = (double) (randNum.nextInt(300 - 200 + 1) + 200);
+                } //	Sub Q 15
+                else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 8)) {
+                    System.out.println("q15");
+                    angle = (double) (randNum.nextInt(265 - 180 + 1) + 180);
 
-                    } //	Sub Q 15
-                    else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 8)) {
-
-                        angle = (double) (randNum.nextInt(265 - 180 + 1) + 180);
-
-                    } //	Sub Q 16
-                    else {
-
-                        angle = (double) (randNum.nextInt(220 - 140 + 1) + 140);
-
-                    }
-
-                }//end Quadrant 4
-                //	Quadrant 1
+                } //	Sub Q 16
                 else {
+                    System.out.println("q16");
+                    angle = (double) (randNum.nextInt(220 - 140 + 1) + 140);
 
-                    //	Sub Q 4
-                    if (this.getCoordenada_y() - circ_y < -Math.sin(3 * Math.PI / 8)) {
+                }
 
-                        angle = (double) (randNum.nextInt(130 - 50 + 1) + 50);
-
-                    } //	Sub Q 3
-                    else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 4)) {
-
-                        angle = (double) (randNum.nextInt(175 - 85 + 1) + 85);
-
-                    } //	Sub Q 2
-                    else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 8)) {
-
-                        angle = (double) (randNum.nextInt(185 - 105 + 1) + 105);
-
-                    } //	Sub Q 1
-                    else {
-
-                        angle = (double) (randNum.nextInt(220 - 140 + 1) + 140);
-
-                    }
-                }//end Quadrant 1
-
-            }//end right side of boundary
-            //	Left side of boundary
+            }//end Quadrant 4
+            //	Quadrant 1
             else {
 
-                //	Quadrant 3
-                if (this.getCoordenada_y() > circ_y) {
+                //	Sub Q 4
+                if (this.getCoordenada_y() - circ_y < -Math.sin(3 * Math.PI / 8)) {
+                    System.out.println("q4");
+                    angle = (double) (randNum.nextInt(30 - 0 + 1) + 0);
+                    //angle = (double) (randNum.nextInt(130 - 50 + 1) + 50);
+                    System.out.println("angle: " + angle);
 
-                    //	Sub Q 12
-                    if (this.getCoordenada_y() - circ_y > Math.sin(3 * Math.PI / 8)) {
+                } //	Sub Q 3
+                else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 4)) {
+                    System.out.println("q3");
+                    angle = (double) (randNum.nextInt(45 - 30 + 1) + 30);
+                    //angle = (double) (randNum.nextInt(175 - 85 + 1) + 85);
 
-                        angle = (double) (randNum.nextInt(330 - 230 + 1) + 230);
+                } //	Sub Q 2
+                else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 8)) {
+                    System.out.println("q2");
+                    angle = (double) (randNum.nextInt(185 - 105 + 1) + 105);
 
-                    } //	Sub Q 11
-                    else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 4)) {
-
-                        angle = (double) (randNum.nextInt(350 - 270 + 1) + 270);
-
-                    } //	Sub Q 10
-                    else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 8)) {
-
-                        angle = (double) (randNum.nextInt(90) - 85);
-
-                    } //	Sub Q 9
-                    else {
-
-                        angle = (double) (randNum.nextInt(80) - 40);
-
-                    }
-                }//end Quadrant 3
-                //	Quadrant 2
+                } //	Sub Q 1
                 else {
+                    System.out.println("q1");
+                    angle = (double) (randNum.nextInt(220 - 140 + 1) + 140);
 
-                    //	Sub Q 5
-                    if (this.getCoordenada_y() - circ_y < -Math.sin(3 * Math.PI / 8)) {
+                }
+            }//end Quadrant 1
 
-                        angle = (double) (randNum.nextInt(130 - 50 + 1) + 50);
+        }//end right side of boundary
+        //	Left side of boundary
+        else {
 
-                    } //	Sub Q 6
-                    else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 4)) {
+            //	Quadrant 3
+            if (this.getCoordenada_y() > circ_y) {
 
-                        angle = (double) (randNum.nextInt(95 - 5 + 1) + 5);
+                //	Sub Q 12
+                if (this.getCoordenada_y() - circ_y > Math.sin(3 * Math.PI / 8)) {
+System.out.println("q12");
+                    angle = (double) (randNum.nextInt(225 - 210 + 1) + 210);
 
-                    } //	Sub Q 7
-                    else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 8)) {
+                } //	Sub Q 11
+                else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 4)) {
+System.out.println("q11");
+                    angle = (double) (randNum.nextInt(350 - 270 + 1) + 270);
 
-                        angle = (double) (randNum.nextInt(80));
+                } //	Sub Q 10
+                else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 8)) {
+System.out.println("q10");
+                    angle = (double) (randNum.nextInt(90) - 85);
 
-                    } //	Sub Q 8
-                    else {
+                } //	Sub Q 9
+                else {
+System.out.println("q9");
+                    angle = (double) (randNum.nextInt(80) - 40);
 
-                        angle = (double) (randNum.nextInt(80) - 40);
+                }
+            }//end Quadrant 3
+            //	Quadrant 2
+            else {
 
-                    }
-                }//end Quadrant 2
+                //	Sub Q 5
+                if (this.getCoordenada_y() - circ_y < -Math.sin(3 * Math.PI / 8)) {
+System.out.println("q5");
+                    angle = (double) (randNum.nextInt(130 - 50 + 1) + 50);
 
-            }//end left side of boundary
+                } //	Sub Q 6
+                else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 4)) {
+System.out.println("q6");
+                    angle = (double) (randNum.nextInt(95 - 5 + 1) + 5);
 
-            this.setCoordenada_y((int) (speed * Math.cos(Math.toRadians(angle))));
-            this.setCoordenada_x((int) (speed * Math.sin(Math.toRadians(angle))));
+                } //	Sub Q 7
+                else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 8)) {
+System.out.println("q7");
+                    angle = (double) (randNum.nextInt(80));
+
+                } //	Sub Q 8
+                else {
+System.out.println("q8");
+                    angle = (double) (randNum.nextInt(80) - 40);
+
+                }
+            }//end Quadrant 2
+
+        }//end left side of boundary
+
+        this.setDireccion_y((int) (speed * Math.sin(Math.toRadians(angle))));
+        this.setDireccion_x((int) (speed * Math.cos(Math.toRadians(angle))));
         //end if (changeAngle)
 //        switch (segmento) {
 //            case S_I: {
 //                if (0 <= theta && theta < 30) { // Si se encuentra entre los ángulos 0 y 30
 //                    angulo_inf = 0;
 //                    angulo_sup = 30;
-//                    angle = (double) ( randNum.nextInt(0 + 30));
+//                    System.out.println("0 a 30");
+//                    angle = (double) (randNum.nextInt(30) + 30);
 //
 //                } else if (30 <= theta && theta < 45) { // Si se encuentra entre los ángulos 30 y 45
 //                    angulo_inf = 30;
 //                    angulo_sup = 45;
-//
+//                    System.out.println("30 a 45");
 //
 //                } else if (45 <= theta && theta < 60) { // Si se encuentra entre los ángulos 45 y 60
 //                    angulo_inf = 45;
 //                    angulo_sup = 60;
-//
+//                    System.out.println("45 a 60");
+//                    int rand = randNum.nextInt(30-20+1) + 20;
+//                    System.out.println(rand);
+//                    angle = (double) (rand);
+//                    
+//                    
 //                } else if (60 <= theta && theta < 90) { // Si se encuentra entre los ángulos 60 y 90
 //                    angulo_inf = 60;
 //                    angulo_sup = 90;
+//                    
+//                    System.out.println("60 a 90");
 //
 //                }
 //                break;
@@ -263,11 +275,9 @@ public class Bola extends Actor {
 //                    angulo_inf = 90;
 //                    angulo_sup = 120;
 //
-//
 //                } else if (120 <= theta && theta < 135) { // Si se encuentra entre los ángulos 30 y 45
 //                    angulo_inf = 120;
 //                    angulo_sup = 135;
-//
 //
 //                } else if (135 <= theta && theta < 150) { // Si se encuentra entre los ángulos 45 y 60
 //                    angulo_inf = 135;
@@ -287,11 +297,9 @@ public class Bola extends Actor {
 //                    angulo_inf = 180;
 //                    angulo_sup = 210;
 //
-//
 //                } else if (210 <= theta && theta < 225) { // Si se encuentra entre los ángulos 30 y 45
 //                    angulo_inf = 210;
 //                    angulo_sup = 225;
-//
 //
 //                } else if (225 <= theta && theta < 240) { // Si se encuentra entre los ángulos 45 y 60
 //                    angulo_inf = 45;
@@ -310,11 +318,9 @@ public class Bola extends Actor {
 //                    angulo_inf = 270;
 //                    angulo_sup = 300;
 //
-//
 //                } else if (300 <= theta && theta < 315) { // Si se encuentra entre los ángulos 30 y 45
 //                    angulo_inf = 30;
 //                    angulo_sup = 45;
-//
 //
 //                } else if (315 <= theta && theta < 330) { // Si se encuentra entre los ángulos 45 y 60
 //                    angulo_inf = 45;
@@ -329,7 +335,7 @@ public class Bola extends Actor {
 //            }
 //        }
         this.setDireccion_x((int) (speed * Math.cos(Math.toRadians(angle))));
-        this.setDireccion_y((int) (speed * Math.cos(Math.toRadians(angle))));
+        this.setDireccion_y((int) (speed * Math.sin(Math.toRadians(angle))));
         System.out.println("x: " + this.getDireccion_x());
         System.out.println("y: " + this.getDireccion_y());
     }
