@@ -185,14 +185,16 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     public void update(java.util.Observable sujeto, Object objeto) {
         for (Bola b : model.getListaBolas()) {
             if (b.punto != 0) {
-                if (puntaje == 1) 
+                if (b.punto == 1) {
                     puntaje++;
-                else if (puntaje == 2)
+                } else if (b.punto == 2) {
                     puntaje--;
-                
+                }
+
                 b.punto = 0;
             }
         }
+        System.out.println(puntaje);
         this.repaint();
 
     }
@@ -247,6 +249,10 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         arcos.drawArc(x, y, 500, 500, 345, 15);
         //Se pone otra vez el ancho
         arcos.setStroke(new BasicStroke(1));
+        arcos.setColor(Color.orange);
+        graphics.setFont(new java.awt.Font("TimesRoman", java.awt.Font.PLAIN, 50)); 
+
+        graphics.drawString(Integer.toString(puntaje), 500, 120);
     }
 
     private void dibujarBola(Bola bola, java.awt.Graphics graphics) {
