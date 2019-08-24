@@ -59,13 +59,17 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 JTextField esferasOP = new JTextField("1");
                 JTextField velocidadOP = new JTextField("1");
                 Object[] message = {"Esferas:", esferasOP, "Velocidad:", velocidadOP};
+                controller.pause();
                 javax.swing.JOptionPane.showConfirmDialog(null, message, "Settings", javax.swing.JOptionPane.OK_CANCEL_OPTION);
+                controller.continuar();
             }
         });
         aboutDB.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                controller.pause();
                 javax.swing.JOptionPane.showMessageDialog(null, aboutInfo, "About", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                controller.continuar();
             }
 
         });
