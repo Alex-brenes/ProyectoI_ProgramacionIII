@@ -13,12 +13,12 @@ import java.util.Random;
  */
 public class Bola extends Actor {
 
-    private int radio;
+    static int radio;
     private int speed;
 
-    public Bola(int coordenada_x, int coordenada_y, int direccion_x, int direccion_y, int radio) {
+    public Bola(int coordenada_x, int coordenada_y, int direccion_x, int direccion_y) {
         super(coordenada_x, coordenada_y, direccion_x, direccion_y);
-        this.radio = radio;
+        this.radio = 15;
         this.speed = 10;
     }
 
@@ -116,7 +116,7 @@ public class Bola extends Actor {
                             this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
                             this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
                             reboto = false;
-                            System.out.println("Fuera");
+
                         } else { //Si no, se cambia la dirección
                             if (!reboto) {
                                 nuevaDireccion(model, S_III);
@@ -150,7 +150,7 @@ public class Bola extends Actor {
                             this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
                             this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
                             reboto = false;
-                            System.out.println("Fuera");
+
                         } else { //Si no, se cambia la dirección
                             if (!reboto) {
                                 nuevaDireccion(model, S_IV);
@@ -320,16 +320,16 @@ public class Bola extends Actor {
 
                     } else if (45 <= theta && theta < 60) { // Si se encuentra entre los ángulos 45 y 60
                         //ESTOS YA NO SIGUEN LOS ÁNGULOS PARA EVITAR QUE SE SALGA LA BOLA
-                        angulo_inf = 210;
-                        angulo_sup = 215;
+                        angulo_inf = 180;
+                        angulo_sup = 210;
                         angle = (double) (randNum.nextInt(135 - 120 + 1) + 120);
                         System.out.println("45 a 60\n\tangulo = " + angle);
                         punto = 2;
 
                     } else if (60 <= theta && theta < 90) { // Si se encuentra entre los ángulos 60 y 90
                         //ESTOS YA NO SIGUEN LOS ÁNGULOS PARA EVITAR QUE SE SALGA LA BOLA
-                        angulo_inf = 180;
-                        angulo_sup = 210;
+                        angulo_inf = 150;
+                        angulo_sup = 180;
                         angle = (double) (randNum.nextInt(120 - 90 + 1) + 90);
                         System.out.println("60 a 90\n\tangulo = " + angle);
                         if (theta >= 75) {//Si theta es mayor a 15 no hay punto
@@ -515,20 +515,30 @@ public class Bola extends Actor {
                         angulo_inf = 315;
                         angulo_sup = 330;
                         System.out.println("270 a 300\n\tangulo = ");
+                        if (theta <= 285) {
+                            punto = 1;
+                        }
 
                     } else if (300 <= theta && theta < 315) { // Si se encuentra entre los ángulos 30 y 45
                         angulo_inf = 225;
                         angulo_sup = 240;
                         System.out.println("300 a 315\n\tangulo = ");
+                        punto = 2;
+
                     } else if (315 <= theta && theta < 330) { // Si se encuentra entre los ángulos 45 y 60
                         angulo_inf = 135;
                         angulo_sup = 150;
                         System.out.println("315 a 330\n\tangulo = ");
+
+                        punto = 2;
                     } else if (330 <= theta && theta < 360) { // Si se encuentra entre los ángulos 60 y 90
                         angulo_inf = 180;
                         angulo_sup = 210;
                         System.out.println("330 a 360\n\tangulo = ");
-
+                        punto = 2;
+                        if (theta >= 345) {
+                            punto = 1;
+                        }
                     }
 
                 } else { //Si baja
@@ -536,19 +546,27 @@ public class Bola extends Actor {
                         angulo_inf = 240;
                         angulo_sup = 270;
                         System.out.println("270 a 300\n\tangulo = ");
+                        if (theta <= 285) {
+                            punto = 1;
+                        }
 
                     } else if (300 <= theta && theta < 315) { // Si se encuentra entre los ángulos 30 y 45
                         angulo_inf = 150;
                         angulo_sup = 160;
                         System.out.println("300 a 315\n\tangulo = ");
+                        punto = 2;
                     } else if (315 <= theta && theta < 330) { // Si se encuentra entre los ángulos 45 y 60
                         angulo_inf = 150;
                         angulo_sup = 180;
                         System.out.println("315 a 330\n\tangulo = ");
+                        punto = 2;
                     } else if (330 <= theta && theta < 360) { // Si se encuentra entre los ángulos 60 y 90
                         angulo_inf = 135;
                         angulo_sup = 150;
                         System.out.println("330 a 360\n\tangulo = ");
+                        if (theta >= 345) {
+                            punto = 1;
+                        }
 
                     }
                 }
@@ -594,7 +612,7 @@ public class Bola extends Actor {
         return (Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) < model.getCircunferencia().getRadio());
     }
 
-    private int segmento(Circunferencia c) {
+    public int segmento(Circunferencia c) {
         int xb = this.getCoordenada_x();
         int yb = this.getCoordenada_y();
         int x = c.getCoordenada_x();
@@ -619,10 +637,10 @@ public class Bola extends Actor {
 
     }
 
-    private final int S_I = 0;
-    private final int S_II = 1;
-    private final int S_III = 2;
-    private final int S_IV = 3;
+    static final int S_I = 0;
+    static final int S_II = 1;
+    static final int S_III = 2;
+    static final int S_IV = 3;
     public int punto = 0;
     /*
      0 : No hay cambio

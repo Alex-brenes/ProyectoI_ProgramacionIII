@@ -18,7 +18,7 @@ public class Model extends Observable {
     public Model() {
         this.raqueta = new Raqueta(246/*246*/, 351, 0, 0, 100, 40);
         this.lista_bolas = new ArrayList<Bola>();
-        lista_bolas.add(new Bola(90, 350, -10, 0, 15/*25*/));
+        lista_bolas.add(new Bola(400, 460, 10, 0));
         this.circunferencia = new Circunferencia(45, 80, 250);
     }
 
@@ -53,6 +53,16 @@ public class Model extends Observable {
         return this.circunferencia;
     }
 
+    public void agregarBolas(int c) {
+
+    }
+
+    public void eliminarBolas(int c) {
+        while (c < lista_bolas.size()) {
+            lista_bolas.remove(lista_bolas.size() - 1);
+        }
+    }
+
     public void iniciar() {
         final int mili_segundos = 42;
         Runnable code = new Runnable() {
@@ -70,6 +80,39 @@ public class Model extends Observable {
         };
         Thread thread = new Thread(code);
         thread.start();
+    }
+
+    public void agregarBola(int x, int y) {
+        try {
+            Bola nueva = new Bola(x, y, 0, 0);
+            int xc = this.circunferencia.centro_x();
+            int yc = this.circunferencia.centro_y();
+            if (Math.sqrt(((x - xc) * (x - xc)) + ((y - yc) * (y - yc))) < this.circunferencia.getRadio() - Bola.radio * 3) {
+                //Se toma la velocidad de la bola anterior
+                int bolAnt_x = lista_bolas.get(lista_bolas.size() - 1).getDireccion_x();
+                int bolAnt_y = lista_bolas.get(lista_bolas.size() - 1).getDireccion_y();
+                if(bolAnt_y < 0) 
+                    bolAnt_y *= (-1);
+                if(bolAnt_x < 0)
+                    bolAnt_x *= (-1);
+                switch (nueva.segmento(circunferencia)) {
+                    case Bola.S_I: nueva.setDireccion_x((-1)* bolAnt_x); nueva.setDireccion_y(bolAnt_y); break;
+                    
+                    case Bola.S_II: nueva.setDireccion_x(bolAnt_x); nueva.setDireccion_y(bolAnt_y); break;
+                    
+                    case Bola.S_III: nueva.setDireccion_x(bolAnt_x); nueva.setDireccion_y((-1) * bolAnt_y); break;
+                    
+                    case Bola.S_IV: nueva.setDireccion_x((-1) * bolAnt_x); nueva.setDireccion_y((-1) * bolAnt_y); break;
+                    
+                }
+                this.lista_bolas.add(nueva);
+            } else {
+                throw new java.io.IOException();
+            }
+
+        } catch (java.io.IOException ex) {
+
+        }
     }
 
     public void detenerVer() {
@@ -108,7 +151,6 @@ public class Model extends Observable {
     static final int ABA = 1;
     static final int IZQ = 2;
     static final int DER = 3;
-    static final int G = 1;
-    static final int P = 2;
+
     private static boolean isPaused = false;
 }

@@ -18,7 +18,7 @@ public class DodgeBall {
         for (;;) {
             model.avanzar();
             try {
-                Thread.sleep(412);
+                Thread.sleep(42);
             } catch (InterruptedException e) {
 
             }

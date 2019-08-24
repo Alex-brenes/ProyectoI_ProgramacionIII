@@ -90,12 +90,40 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         settings.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JTextField esferasOP = new JTextField("1");
-                JTextField velocidadOP = new JTextField("1");
-                Object[] message = {"Esferas:", esferasOP, "Velocidad:", velocidadOP};
                 controller.pause();
-                javax.swing.JOptionPane.showConfirmDialog(null, message, "Settings", javax.swing.JOptionPane.OK_CANCEL_OPTION);
+                JTextField esferasOP = new JTextField(Integer.toString(bolas));
+                JTextField velocidadOP = new JTextField(Integer.toString(velocidad));
+                Object[] message = {"Esferas:", esferasOP, "Velocidad:", velocidadOP};
+
+                int entrada = javax.swing.JOptionPane.showConfirmDialog(null, message, "Settings", javax.swing.JOptionPane.OK_CANCEL_OPTION);
+
+                if (entrada == 0) {
+                    if (0 < Integer.parseInt(esferasOP.getText())) { //Si es un numero positivo de bolas
+                        if (bolas < Integer.parseInt(esferasOP.getText())) {//Si aumenta la cantidad de bolas
+                            // model.agregarBolas(Integer.parseInt(esferasOP.getText()));
+
+                        } else if (bolas > Integer.parseInt(esferasOP.getText())) { //Si disminuye
+                            model.eliminarBolas(Integer.parseInt(esferasOP.getText()));
+                        }
+                        bolas = Integer.parseInt(esferasOP.getText());
+
+                    }
+                    if (0 < Integer.parseInt(velocidadOP.getText())) { //Si es un número positivo
+                        velocidad = Integer.parseInt(velocidadOP.getText());
+                    }
+
+                }
+
                 controller.continuar();
+
+            }
+        });
+        panelJuego.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (model.getListaBolas().size() < bolas) {
+                    model.agregarBola(e.getX(), e.getY());
+
+                }
             }
         });
         aboutDB.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +222,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 b.punto = 0;
             }
         }
-        System.out.println(puntaje);
         this.repaint();
 
     }
@@ -250,7 +277,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         //Se pone otra vez el ancho
         arcos.setStroke(new BasicStroke(1));
         arcos.setColor(Color.orange);
-        graphics.setFont(new java.awt.Font("TimesRoman", java.awt.Font.PLAIN, 50)); 
+        graphics.setFont(new java.awt.Font("TimesRoman", java.awt.Font.PLAIN, 50));
 
         graphics.drawString(Integer.toString(puntaje), 500, 120);
     }
@@ -279,6 +306,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     private final String settingsOP = "Esferas:";
     private final String aboutInfo = "\t\tDodgeBall\nProgramación III. Proyecto I.\nAutores:\n\tJosé Alexander Brenes Brenes.\n\tJuan Daniel Quirós";
     private int puntaje = 0;
+    private int bolas = 1;
+    private int velocidad = 1;
     Image ballImage;
     Image background;
     Image circ;
