@@ -146,6 +146,18 @@ public class Bola extends Actor {
 //                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
 //                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
 //                        }
+                        if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x() + 2 * this.getRadio(), this.getCoordenada_y() + 2 * this.getRadio(), model)) { //Si el punto es interior a la circunferencia
+                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
+                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
+                            reboto = false;
+                            System.out.println("Fuera");
+                        } else { //Si no, se cambia la dirección
+                            if (!reboto) {
+                                nuevaDireccion(model, S_IV);
+                            }
+                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
+                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
+                        }
                         break;
                     }
                 }
@@ -459,24 +471,52 @@ public class Bola extends Actor {
                 theta *= (-1);
                 theta = 360 - theta;
                 System.out.println(theta);
-                if (270 <= theta && theta < 300) { // Si se encuentra entre los ángulos 0 y 30
-                    angulo_inf = 270;
-                    angulo_sup = 300;
+                if (this.getDireccion_y() < 0) {//Si sube
 
-                } else if (300 <= theta && theta < 315) { // Si se encuentra entre los ángulos 30 y 45
-                    angulo_inf = 30;
-                    angulo_sup = 45;
+                    if (270 <= theta && theta < 300) { // Si se encuentra entre los ángulos 0 y 30
+                        angulo_inf = 315;
+                        angulo_sup = 330;
+                        System.out.println("270 a 300\n\tangulo = ");
 
-                } else if (315 <= theta && theta < 330) { // Si se encuentra entre los ángulos 45 y 60
-                    angulo_inf = 45;
-                    angulo_sup = 60;
+                    } else if (300 <= theta && theta < 315) { // Si se encuentra entre los ángulos 30 y 45
+                        angulo_inf = 225;
+                        angulo_sup = 240;
+                        System.out.println("300 a 315\n\tangulo = ");
+                    } else if (315 <= theta && theta < 330) { // Si se encuentra entre los ángulos 45 y 60
+                        angulo_inf = 135;
+                        angulo_sup = 150;
+                        System.out.println("315 a 330\n\tangulo = ");
+                    } else if (330 <= theta && theta < 360) { // Si se encuentra entre los ángulos 60 y 90
+                        angulo_inf = 180;
+                        angulo_sup = 210;
+                        System.out.println("330 a 360\n\tangulo = ");
 
-                } else if (330 <= theta && theta < 360) { // Si se encuentra entre los ángulos 60 y 90
-                    angulo_inf = 60;
-                    angulo_sup = 90;
+                    }
 
+                } else { //Si baja
+                    if (270 <= theta && theta < 300) { // Si se encuentra entre los ángulos 0 y 30
+                        angulo_inf = 240;
+                        angulo_sup = 270;
+                        System.out.println("270 a 300\n\tangulo = ");
+
+                    } else if (300 <= theta && theta < 315) { // Si se encuentra entre los ángulos 30 y 45
+                        angulo_inf = 150;
+                        angulo_sup = 160;
+                        System.out.println("300 a 315\n\tangulo = ");
+                    } else if (315 <= theta && theta < 330) { // Si se encuentra entre los ángulos 45 y 60
+                        angulo_inf = 150;
+                        angulo_sup = 180;
+                        System.out.println("315 a 330\n\tangulo = ");
+                    } else if (330 <= theta && theta < 360) { // Si se encuentra entre los ángulos 60 y 90
+                        angulo_inf = 135;
+                        angulo_sup = 150;
+                        System.out.println("330 a 360\n\tangulo = ");
+
+                    }
                 }
 
+                angle = (double) (randNum.nextInt(angulo_sup - angulo_inf + 1) + angulo_inf);
+                System.out.println(angle);
                 break;
             }
         }

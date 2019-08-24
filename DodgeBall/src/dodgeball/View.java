@@ -5,8 +5,12 @@
 package dodgeball;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -23,7 +27,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     public View() {
         super("Dodge Ball");
         iniciarFrame();
-
         this.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -33,6 +36,16 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 formKeyReleased(evt);
             }
         });
+        try {
+            // Get Image
+
+//            ballImage = ImageIO.read(new URL("imagenes/bola_30x30.gif"));
+            background = ImageIO.read(getClass().getResourceAsStream("imagenes/background_590x600.jpg"));
+            circun = ImageIO.read(getClass().getResourceAsStream("imagenes/circ_1_550x550.png"));
+
+        } catch (IOException ex) {
+
+        }
     }
 
     private void iniciarFrame() {
@@ -74,7 +87,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
         });
         aboutDB.setSize(0, 10000);
-        JMenuItem exit = new JMenuItem("Exit", new ImageIcon("imagenes/salir.gif"));
+        JMenuItem exit = new JMenuItem("Exit");
         exit.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -172,19 +185,22 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         graphics.setColor(java.awt.Color.RED);
         graphics.drawLine(x + r, y, x + r, y + 2 * r);
         graphics.drawLine(x, y + r, x + 2 * r, y + r);
+        graphics.drawImage(background, 0, 50, this);
+        graphics.drawImage(circun, x, y, this);
 
     }
 
     private void dibujarBola(Bola bola, java.awt.Graphics graphics) {
-        graphics.setColor(java.awt.Color.PINK);
+//        graphics.setColor(java.awt.Color.PINK);
         graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getRadio() * 2, bola.getRadio() * 2);
-        graphics.setColor(java.awt.Color.BLUE);
-        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y());
-        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2);
-        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2, bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
-        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
-
-        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio(), bola.getCoordenada_y() + bola.getRadio(), 295, 330);
+//        graphics.setColor(java.awt.Color.BLUE);
+//        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y());
+//        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2);
+//        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2, bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
+//        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
+//
+//        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio(), bola.getCoordenada_y() + bola.getRadio(), 295, 330);
+        graphics.drawImage(ballImage, bola.getCoordenada_x(), bola.getCoordenada_y(), this);
 
     }
 
@@ -197,4 +213,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     private final int HEIGHT = 590;
     private final String settingsOP = "Esferas:";
     private final String aboutInfo = "\t\tDodgeBall\nProgramación III. Proyecto I.\nAutores:\n\tJosé Alexander Brenes Brenes.\n\tJuan Daniel Quirós";
+    Image ballImage;
+    Image background;
+    Image circun;
 }
