@@ -16,9 +16,9 @@ public class Model extends Observable {
     private final Circunferencia circunferencia;
 
     public Model() {
-        this.raqueta = new Raqueta(100/*246*/, 0, 0, 0, 100, 40);
+        this.raqueta = new Raqueta(246/*246*/, 351, 0, 0, 100, 40);
         this.lista_bolas = new ArrayList<Bola>();
-        lista_bolas.add(new Bola(400, 480, 10, 1, 15/*25*/));
+        lista_bolas.add(new Bola(400, 180, 10, 1, 15/*25*/));
         this.circunferencia = new Circunferencia(45, 80, 250);
     }
 
@@ -100,12 +100,15 @@ public class Model extends Observable {
             }
         }
     }
-    public void cambiaEstado(){
+
+    public void cambiaEstado() {
         isPaused = !isPaused;
     }
     static final int ARR = 0;
     static final int ABA = 1;
     static final int IZQ = 2;
     static final int DER = 3;
+    static final int G = 1;
+    static final int P = 2;
     private static boolean isPaused = false;
 }

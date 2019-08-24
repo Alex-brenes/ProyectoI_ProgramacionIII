@@ -4,14 +4,14 @@
 // Métodos para la visualización del juego
 package dodgeball;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -26,7 +26,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     public View() {
         super("Dodge Ball");
-        iniciarFrame();
+
         this.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -39,32 +39,53 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         try {
             // Get Image
 
-//            ballImage = ImageIO.read(new URL("imagenes/bola_30x30.gif"));
+            ballImage = ImageIO.read(getClass().getResourceAsStream("imagenes/ball30x30.gif"));
+//            circ = ImageIO.read(getClass().getResourceAsStream("imagenes/circbienrecortada.png"));
             background = ImageIO.read(getClass().getResourceAsStream("imagenes/background_590x600.jpg"));
-            circun = ImageIO.read(getClass().getResourceAsStream("imagenes/circ_1_550x550.png"));
 
         } catch (IOException ex) {
 
         }
+        iniciarFrame();
     }
 
     private void iniciarFrame() {
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.LIGHT_GRAY);
-        this.getContentPane().add(panel);
+        JPanel principal = new JPanel();
+        JPanel panelMenu = new JPanel();
+        JPanel panelJuego = new JPanel();
+        principal.setBackground(Color.pink);
+        this.add(principal);
+        this.setLayout(null);
+        principal.setLayout(null);
+        panelJuego.setLayout(null);
+        principal.setBounds(0, 0, WIDTH, HEIGHT);
+//        panelJuego.setLayout(new java.awt.BorderLayout());
+        panelJuego.setBackground(Color.cyan);
+        panelJuego.setBounds(0, 0, WIDTH, HEIGHT);
+        panelJuego.setOpaque(true);
+        panelMenu.setBounds(0, 0, WIDTH, HEIGHT);
+        principal.add(panelJuego);
+        panelJuego.add(panelMenu);
+
+        //
         this.setSize(WIDTH, HEIGHT);
+        panelMenu.setLayout(new java.awt.BorderLayout());
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+//        this.getContentPane().add(panelMenu);
 
         JMenuBar menu_bar = new JMenuBar();
-        this.setJMenuBar(menu_bar);
+
+        panelMenu.add(menu_bar, java.awt.BorderLayout.NORTH);
+        this.setLocationRelativeTo(null);
+//
+//        this.setJMenuBar(menu_bar);
         JMenu file = new JMenu("File");
         JMenuItem settings = new JMenuItem("Settings");
         JMenu edit = new JMenu("Edit");
         edit.add(settings);
         JMenu about = new JMenu("About");
-
+//
         JMenuItem aboutDB = new JMenuItem("DodgeBall");
         settings.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -86,7 +107,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             }
 
         });
-        aboutDB.setSize(0, 10000);
+
         JMenuItem exit = new JMenuItem("Exit");
         exit.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -100,8 +121,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         menu_bar.add(file);
         menu_bar.add(edit);
         menu_bar.add(about);
-        JLabel etiqueta = new JLabel("DodgeBall");
-        panel.add(etiqueta);
+//        JLabel etiqueta = new JLabel("DodgeBall");
+
     }
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {
@@ -162,7 +183,16 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     @Override
     public void update(java.util.Observable sujeto, Object objeto) {
-
+        for (Bola b : model.getListaBolas()) {
+            if (b.punto != 0) {
+                if (puntaje == 1) 
+                    puntaje++;
+                else if (puntaje == 2)
+                    puntaje--;
+                
+                b.punto = 0;
+            }
+        }
         this.repaint();
 
     }
@@ -185,35 +215,65 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         graphics.setColor(java.awt.Color.RED);
         graphics.drawLine(x + r, y, x + r, y + 2 * r);
         graphics.drawLine(x, y + r, x + 2 * r, y + r);
-        graphics.drawImage(background, 0, 50, this);
-        graphics.drawImage(circun, x, y, this);
-
+        //graphics.drawImage(background, 0, 100, this);
+        //graphics.drawImage(circ, x, y, this);
+        //Para el ancho de los arcos
+        Graphics2D arcos = (Graphics2D) (graphics);
+        arcos.setStroke(new BasicStroke(4));
+        //Segmento I
+        graphics.setColor(java.awt.Color.green);
+        graphics.drawArc(x, y, 500, 500, 0, 15);
+        graphics.setColor(java.awt.Color.RED);
+        graphics.drawArc(x, y, 500, 500, 30, 30);
+        graphics.setColor(java.awt.Color.green);
+        arcos.drawArc(x, y, 500, 500, 75, 15);
+        //Segmento II
+        arcos.drawArc(x, y, 500, 500, 90, 15);
+        graphics.setColor(java.awt.Color.RED);
+        arcos.drawArc(x, y, 500, 500, 120, 30);
+        graphics.setColor(java.awt.Color.green);
+        arcos.drawArc(x, y, 500, 500, 165, 15);
+        //Segmento III
+        arcos.drawArc(x, y, 500, 500, 180, 15);
+        graphics.setColor(java.awt.Color.RED);
+        arcos.drawArc(x, y, 500, 500, 210, 30);
+        graphics.setColor(java.awt.Color.green);
+        arcos.drawArc(x, y, 500, 500, 255, 15);
+        //Segmento IV
+        arcos.drawArc(x, y, 500, 500, 270, 15);
+        graphics.setColor(java.awt.Color.RED);
+        arcos.drawArc(x, y, 500, 500, 300, 30);
+        graphics.setColor(java.awt.Color.green);
+        arcos.drawArc(x, y, 500, 500, 345, 15);
+        //Se pone otra vez el ancho
+        arcos.setStroke(new BasicStroke(1));
     }
 
     private void dibujarBola(Bola bola, java.awt.Graphics graphics) {
 //        graphics.setColor(java.awt.Color.PINK);
-        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getRadio() * 2, bola.getRadio() * 2);
-//        graphics.setColor(java.awt.Color.BLUE);
-//        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y());
-//        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2);
-//        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2, bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
-//        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
-//
-//        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio(), bola.getCoordenada_y() + bola.getRadio(), 295, 330);
+////        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getRadio() * 2, bola.getRadio() * 2);
+        graphics.setColor(java.awt.Color.BLUE);
+        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y());
+        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2);
+        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2, bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
+        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
+
+        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio(), bola.getCoordenada_y() + bola.getRadio(), 295, 330);
         graphics.drawImage(ballImage, bola.getCoordenada_x(), bola.getCoordenada_y(), this);
 
     }
 
     private void dibujarRaqueta(Raqueta raqueta, java.awt.Graphics graphics) {
         graphics.setColor(java.awt.Color.magenta);
-        graphics.drawRect(raqueta.getCoordenada_x(), raqueta.getCoordenada_y(), raqueta.getBase(), raqueta.getAltura());
+        graphics.fillRect(raqueta.getCoordenada_x(), raqueta.getCoordenada_y(), raqueta.getBase(), raqueta.getAltura());
     }
 
     private final int WIDTH = 590;
     private final int HEIGHT = 590;
     private final String settingsOP = "Esferas:";
     private final String aboutInfo = "\t\tDodgeBall\nProgramación III. Proyecto I.\nAutores:\n\tJosé Alexander Brenes Brenes.\n\tJuan Daniel Quirós";
+    private int puntaje = 0;
     Image ballImage;
     Image background;
-    Image circun;
+    Image circ;
 }

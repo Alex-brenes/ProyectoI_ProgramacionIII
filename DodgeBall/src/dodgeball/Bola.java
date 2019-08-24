@@ -170,15 +170,11 @@ public class Bola extends Actor {
         reboto = true;
         int circ_x = model.getCircunferencia().centro_x();
         int circ_y = model.getCircunferencia().centro_y();
-        int alto = model.getCircunferencia().centro_y() - model.getCircunferencia().getRadio();//Necesitan mejores nombres
-        int bajo = model.getCircunferencia().centro_y() + model.getCircunferencia().getRadio();//Necesitan mejores nombres
         double theta = Math.toDegrees(Math.atan2(this.getCoordenada_y() + radio - circ_y, this.getCoordenada_x() + radio - circ_x)) * (-1);
-        System.out.println(theta);
         int angulo_sup = 0;
         int angulo_inf = 0;
         double angle = 0.0;
         Random randNum = new Random(System.currentTimeMillis());
-        System.out.println(theta);
 
         //	Right side of boundary
 //        if (this.getCoordenada_x() > circ_x) {
@@ -298,8 +294,8 @@ public class Bola extends Actor {
 //        this.setDireccion_x((int) (speed * Math.cos(Math.toRadians(angle))));
         //end if (changeAngle)
         /*
-                TODO ESTO es para el rebote si la bola viene BAJANDO.
-                Hay que hacer otro para cuando la bola va SUBIENDO.
+         TODO ESTO es para el rebote si la bola viene BAJANDO.
+         Hay que hacer otro para cuando la bola va SUBIENDO.
          */
         switch (segmento) {
 
@@ -345,12 +341,14 @@ public class Bola extends Actor {
                         angulo_sup = 150;
                         angle = (double) (randNum.nextInt(150 - 135 + 1) + 135);
                         System.out.println("30 a 45\n\tangulo = " + angle);
+                        punto = 2;
 
                     } else if (45 <= theta && theta < 60) { // Si se encuentra entre los ángulos 45 y 60
                         angulo_inf = 120;
                         angulo_sup = 135;
                         angle = (double) (randNum.nextInt(135 - 120 + 1) + 120);
                         System.out.println("45 a 60\n\tangulo = " + angle);
+                        punto = 2;
 
                     } else if (60 <= theta && theta < 90) { // Si se encuentra entre los ángulos 60 y 90
                         angulo_inf = 90;
@@ -585,6 +583,13 @@ public class Bola extends Actor {
     private final int S_II = 1;
     private final int S_III = 2;
     private final int S_IV = 3;
+    public int punto = 0;
+    /*
+    0 : No hay cambio
+    1 : Gana punto (Poner en 0 después)
+    2 : Pierde punto (Poner en 0 después)
+    */
+    
     private boolean reboto = false;
 
 }
