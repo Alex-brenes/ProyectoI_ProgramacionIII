@@ -18,8 +18,8 @@ public class Raqueta extends Actor {
     @Override
     public void movimiento(Model model) {
 
-        switch(segmento(model.getCircunferencia())){
-            case S_I:{
+        switch (segmento(model.getCircunferencia())) {
+            case S_I: {
                 if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x() + this.getBase(), this.getCoordenada_y(), model)) { //Si el punto es interior a la circunferencia
                     this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
                     this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
@@ -69,8 +69,6 @@ public class Raqueta extends Actor {
             }
         }
 
-            
-
     }
 
     private int segmento(Circunferencia c) {
@@ -116,6 +114,10 @@ public class Raqueta extends Actor {
 
     public void setBase(int base) {
         this.base = base;
+    }
+
+    public boolean interiorRaqueta(int x, int y) {
+        return (y >= this.getCoordenada_y()  && y <= this.getCoordenada_y() + this.altura) && (x >= this.getCoordenada_x() && x <= this.getCoordenada_x() + this.getBase());
     }
 
     private final int S_I = 0;

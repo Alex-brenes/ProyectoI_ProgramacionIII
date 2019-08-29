@@ -64,22 +64,21 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         panelJuego.setBounds(0, 0, WIDTH, HEIGHT);
         panelJuego.setOpaque(true);
         panelMenu.setBounds(0, 0, WIDTH, HEIGHT);
-        principal.add(panelJuego);
-        panelJuego.add(panelMenu);
-
+//        principal.add(panelJuego);
+//        panelJuego.add(panelMenu);
         //
         this.setSize(WIDTH, HEIGHT);
-        panelMenu.setLayout(new java.awt.BorderLayout());
+//        panelMenu.setLayout(new java.awt.BorderLayout());
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 //        this.getContentPane().add(panelMenu);
 
         JMenuBar menu_bar = new JMenuBar();
 
-        panelMenu.add(menu_bar, java.awt.BorderLayout.NORTH);
+//        panelMenu.add(menu_bar, java.awt.BorderLayout.NORTH);
         this.setLocationRelativeTo(null);
 //
-//        this.setJMenuBar(menu_bar);
+        this.setJMenuBar(menu_bar);
         JMenu file = new JMenu("File");
         JMenuItem settings = new JMenuItem("Settings");
         JMenu edit = new JMenu("Edit");
@@ -109,7 +108,10 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
                     }
                     if (0 < Integer.parseInt(velocidadOP.getText())) { //Si es un número positivo
-                        velocidad = Integer.parseInt(velocidadOP.getText());
+                        if (velocidad <= TOPE) {
+                            velocidad = Integer.parseInt(velocidadOP.getText());
+                            controller.cambiarVelocidad(velocidad);
+                        }
                     }
 
                 }
@@ -118,7 +120,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
             }
         });
-        panelJuego.addMouseListener(new java.awt.event.MouseAdapter() {
+        principal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (model.getListaBolas().size() < bolas) {
                     model.agregarBola(e.getX(), e.getY());
@@ -205,8 +207,17 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     @Override
     public void paint(java.awt.Graphics graphics) {
-        super.paint(graphics);
-        this.dibujarModelo(model, graphics);
+        if (dibujoAux == null || gAux == null) {
+            dibujoAux = createImage(WIDTH, HEIGHT);
+            gAux = dibujoAux.getGraphics();
+        }
+        this.dibujarModelo(model, gAux);
+        graphics.drawImage(dibujoAux, 0, 0, this);
+    }
+
+    @Override
+    public void update(java.awt.Graphics g) {
+        paint(g);
     }
 
     @Override
@@ -232,7 +243,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             dibujarBola(b, graphics);
         }
         dibujarRaqueta(model.getRaqueta(), graphics);
-        //dibujarBola(model.getBola(), graphics);
     }
 
     private void dibujarCircunferencia(Circunferencia circunferencia, java.awt.Graphics graphics) {
@@ -244,7 +254,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         graphics.setColor(java.awt.Color.RED);
         graphics.drawLine(x + r, y, x + r, y + 2 * r);
         graphics.drawLine(x, y + r, x + 2 * r, y + r);
-        //graphics.drawImage(background, 0, 100, this);
+        graphics.drawImage(background, 0, 0, this);
         //graphics.drawImage(circ, x, y, this);
         //Para el ancho de los arcos
         Graphics2D arcos = (Graphics2D) (graphics);
@@ -307,8 +317,13 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     private final String aboutInfo = "\t\tDodgeBall\nProgramación III. Proyecto I.\nAutores:\n\tJosé Alexander Brenes Brenes.\n\tJuan Daniel Quirós";
     private int puntaje = 0;
     private int bolas = 1;
-    private int velocidad = 1;
+    private int velocidad = 7;
     Image ballImage;
     Image background;
     Image circ;
+    private final int TOPE = 15;
+    //PRUEBA QUITAR PARPADEO
+    private Image dibujoAux;
+    private java.awt.Graphics gAux;
+
 }

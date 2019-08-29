@@ -16,9 +16,9 @@ public class Model extends Observable {
     private final Circunferencia circunferencia;
 
     public Model() {
-        this.raqueta = new Raqueta(246/*246*/, 351, 0, 0, 100, 40);
+        this.raqueta = new Raqueta(246/*246*/, 451, 0, 0, 100, 40);
         this.lista_bolas = new ArrayList<Bola>();
-        lista_bolas.add(new Bola(400, 460, 10, 0));
+        lista_bolas.add(new Bola(120, 290, 7, 7));
         this.circunferencia = new Circunferencia(45, 80, 250);
     }
 
@@ -39,6 +39,9 @@ public class Model extends Observable {
             this.notifyObservers();
         }
 
+    }
+    public void cambiaVelocidad(int nueva_vel){
+        Bola.speed = nueva_vel;
     }
 
     public Raqueta getRaqueta() {

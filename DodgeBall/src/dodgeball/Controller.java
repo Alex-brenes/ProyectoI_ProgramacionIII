@@ -23,7 +23,9 @@ public class Controller {
     public void pause(){
         model.cambiaEstado();
     }
-
+    public void cambiarVelocidad(int nueva_vel){
+        model.cambiaVelocidad(nueva_vel);
+    }
     public void mover(int flecha) {
         model.mover(flecha);
     }
