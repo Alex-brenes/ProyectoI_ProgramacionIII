@@ -23,10 +23,11 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     private Model model;
     private Controller controller;
+    java.awt.image.BufferedImage bf;
 
     public View() {
         super("Dodge Ball");
-
+        bf = new java.awt.image.BufferedImage(WIDTH, HEIGHT, java.awt.image.BufferedImage.TYPE_INT_RGB);
         this.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -37,10 +38,10 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             }
         });
         try {
-            // Get Image
+
 
             ballImage = ImageIO.read(getClass().getResourceAsStream("imagenes/ball30x30.gif"));
-//            circ = ImageIO.read(getClass().getResourceAsStream("imagenes/circbienrecortada.png"));
+
             background = ImageIO.read(getClass().getResourceAsStream("imagenes/background_590x600.jpg"));
 
         } catch (IOException ex) {
@@ -50,41 +51,26 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     }
 
     private void iniciarFrame() {
-        JPanel principal = new JPanel();
-        JPanel panelMenu = new JPanel();
-        JPanel panelJuego = new JPanel();
-        principal.setBackground(Color.pink);
-        this.add(principal);
-        this.setLayout(null);
-        principal.setLayout(null);
-        panelJuego.setLayout(null);
-        principal.setBounds(0, 0, WIDTH, HEIGHT);
-//        panelJuego.setLayout(new java.awt.BorderLayout());
-        panelJuego.setBackground(Color.cyan);
-        panelJuego.setBounds(0, 0, WIDTH, HEIGHT);
-        panelJuego.setOpaque(true);
-        panelMenu.setBounds(0, 0, WIDTH, HEIGHT);
-//        principal.add(panelJuego);
-//        panelJuego.add(panelMenu);
-        //
+        this.setContentPane(new JPanel() {
+            @Override
+            public void paint(java.awt.Graphics g) {
+                g.drawImage(background, 0, 0, this);
+            }
+        });
+
         this.setSize(WIDTH, HEIGHT);
-//        panelMenu.setLayout(new java.awt.BorderLayout());
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        this.getContentPane().add(panelMenu);
 
         JMenuBar menu_bar = new JMenuBar();
-
-//        panelMenu.add(menu_bar, java.awt.BorderLayout.NORTH);
-        this.setLocationRelativeTo(null);
-//
         this.setJMenuBar(menu_bar);
+        this.setLocationRelativeTo(null);
+
         JMenu file = new JMenu("File");
         JMenuItem settings = new JMenuItem("Settings");
         JMenu edit = new JMenu("Edit");
         edit.add(settings);
         JMenu about = new JMenu("About");
-//
         JMenuItem aboutDB = new JMenuItem("DodgeBall");
         settings.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -99,7 +85,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 if (entrada == 0) {
                     if (0 < Integer.parseInt(esferasOP.getText())) { //Si es un numero positivo de bolas
                         if (bolas < Integer.parseInt(esferasOP.getText())) {//Si aumenta la cantidad de bolas
-                            // model.agregarBolas(Integer.parseInt(esferasOP.getText()));
 
                         } else if (bolas > Integer.parseInt(esferasOP.getText())) { //Si disminuye
                             model.eliminarBolas(Integer.parseInt(esferasOP.getText()));
@@ -108,19 +93,18 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
                     }
                     if (0 < Integer.parseInt(velocidadOP.getText())) { //Si es un número positivo
-                        if (velocidad <= TOPE) {
+                        if (Integer.parseInt(velocidadOP.getText()) <= TOPE && Integer.parseInt(velocidadOP.getText()) > 1) {
                             velocidad = Integer.parseInt(velocidadOP.getText());
                             controller.cambiarVelocidad(velocidad);
                         }
                     }
-
                 }
 
                 controller.continuar();
 
             }
         });
-        principal.addMouseListener(new java.awt.event.MouseAdapter() {
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (model.getListaBolas().size() < bolas) {
                     model.agregarBola(e.getX(), e.getY());
@@ -151,8 +135,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         menu_bar.add(file);
         menu_bar.add(edit);
         menu_bar.add(about);
-//        JLabel etiqueta = new JLabel("DodgeBall");
-
     }
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {
@@ -207,12 +189,10 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     @Override
     public void paint(java.awt.Graphics graphics) {
-        if (dibujoAux == null || gAux == null) {
-            dibujoAux = createImage(WIDTH, HEIGHT);
-            gAux = dibujoAux.getGraphics();
-        }
-        this.dibujarModelo(model, gAux);
-        graphics.drawImage(dibujoAux, 0, 0, this);
+        java.awt.Graphics g = bf.getGraphics();
+        super.paint(g);
+        this.dibujarModelo(model, g);
+        graphics.drawImage(bf, 0, 0, null);
     }
 
     @Override
@@ -250,12 +230,11 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         int y = circunferencia.getCoordenada_y();
         int r = circunferencia.getRadio();
         graphics.setColor(java.awt.Color.BLACK);
-        graphics.drawOval(circunferencia.getCoordenada_x()/*WIDTH/2 - circunferencia.getRadio()*/, circunferencia.getCoordenada_y()/*HEIGHT/2 - circunferencia.getRadio()*/, circunferencia.getRadio() * 2, circunferencia.getRadio() * 2);
+        graphics.drawOval(circunferencia.getCoordenada_x(), circunferencia.getCoordenada_y(), circunferencia.getRadio() * 2, circunferencia.getRadio() * 2);
         graphics.setColor(java.awt.Color.RED);
         graphics.drawLine(x + r, y, x + r, y + 2 * r);
         graphics.drawLine(x, y + r, x + 2 * r, y + r);
-        graphics.drawImage(background, 0, 0, this);
-        //graphics.drawImage(circ, x, y, this);
+
         //Para el ancho de los arcos
         Graphics2D arcos = (Graphics2D) (graphics);
         arcos.setStroke(new BasicStroke(4));
@@ -293,8 +272,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     }
 
     private void dibujarBola(Bola bola, java.awt.Graphics graphics) {
-//        graphics.setColor(java.awt.Color.PINK);
-////        graphics.fillOval(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getRadio() * 2, bola.getRadio() * 2);
+
         graphics.setColor(java.awt.Color.BLUE);
         graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y());
         graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2);
@@ -322,8 +300,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     Image background;
     Image circ;
     private final int TOPE = 15;
-    //PRUEBA QUITAR PARPADEO
-    private Image dibujoAux;
-    private java.awt.Graphics gAux;
+
 
 }

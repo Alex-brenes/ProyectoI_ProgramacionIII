@@ -28,6 +28,9 @@ public class Bola extends Actor {
 
     @Override
     public void movimiento(Model model) {
+        int cbx = this.getCoordenada_x() + radio;
+        int cby = this.getCoordenada_y() + radio;
+
         //Colisión con la raqueta
         if (chocaRaquetaHorizontal(model)) {
             this.setDireccion_x(this.getDireccion_x() * (-1));
@@ -42,22 +45,6 @@ public class Bola extends Actor {
                 //Rebote en el ring
                 switch (segmento(model.getCircunferencia())) {
                     case S_I: { //Si está en el segmento I
-//                        if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x() + 2 * this.getRadio(), this.getCoordenada_y(), model)) { //Si el punto es interior a la circunferencia
-//                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
-//                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
-//                        } else { //Si no, se cambia la dirección
-//                            if (this.getDireccion_y() > 0) { //Si va bajando
-//                                System.out.println("Va bajando");
-//                                nuevaDireccion(model, S_I);
-//                            } else {
-//                                nuevaDireccion(model, S_I);
-//                                this.setDireccion_y(this.getDireccion_y() * (-1));
-//
-//                            }
-//                            this.setDireccion_x(this.getDireccion_x() * (-1));
-//                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
-//                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
-//                        }
                         if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x() + 2 * this.getRadio(), this.getCoordenada_y(), model)) {
                             this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
                             this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
@@ -72,22 +59,7 @@ public class Bola extends Actor {
                         break;
                     }
                     case S_II: { //Si está en el segmento II
-//                        if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x(), this.getCoordenada_y(), model)) { //Si el punto es interior a la circunferencia
-//                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
-//                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
-//                        } else { //Si no, se cambia la dirección
-////                            this.setDireccion_x(this.getDireccion_x() * (-1));
-////                            this.setDireccion_y(this.getDireccion_y() * (-1));
-//                            if (this.getDireccion_y() < 0) { //Si va subiendo
-//                                nuevaDireccion(model, S_II);
-//                                this.setDireccion_y(this.getDireccion_y() * (-1));
-//                            } else {
-//                                nuevaDireccion(model, S_II);
-//                            }
-//
-//                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
-//                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
-//                        }
+
                         if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x(), this.getCoordenada_y(), model)) { //Si el punto es interior a la circunferencia
                             this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
                             this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
@@ -102,16 +74,7 @@ public class Bola extends Actor {
                         break;
                     }
                     case S_III: { //Si está en el segmento III
-//                        if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x(), this.getCoordenada_y() + 2 * this.getRadio(), model)) { //Si el punto es interior a la circunferencia
-//                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
-//                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
-//                        } else { //Si no, se cambia la dirección
-//                            nuevaDireccion(model, S_III);
-//                            this.setDireccion_x(this.getDireccion_x() * (-1));
-//                            this.setDireccion_y(this.getDireccion_y() * (-1));
-//                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
-//                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
-//                        }
+
                         if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x(), this.getCoordenada_y() + 2 * this.getRadio(), model)) { //Si el punto es interior a la circunferencia
                             this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
                             this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
@@ -128,24 +91,6 @@ public class Bola extends Actor {
                     }
                     case S_IV: { //Si está en el segmento IV
 
-//                        if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x() + 2 * this.getRadio(), this.getCoordenada_y() + 2 * this.getRadio(), model)) { //Si el punto es interior a la circunferencia
-//                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
-//                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
-//                        } else { //Si no, se cambia la dirección
-//                            System.out.println("IV\n\ty: " + this.getDireccion_y());
-//
-//                            if (this.getDireccion_y() < 0) { //Si va subiendo
-//                                System.out.println("\tViene subiendo");
-//                                nuevaDireccion(model, S_IV);
-//                                this.setDireccion_y(this.getDireccion_y() * (-1));
-//                            } else {
-//                                System.out.println("\tViene Bajando");
-//                                nuevaDireccion(model, S_IV);
-//                            }
-//
-//                            this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
-//                            this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
-//                        }
                         if (interior(model.getCircunferencia().getCoordenada_x() + model.getCircunferencia().getRadio(), model.getCircunferencia().getCoordenada_y() + model.getCircunferencia().getRadio(), this.getCoordenada_x() + 2 * this.getRadio(), this.getCoordenada_y() + 2 * this.getRadio(), model)) { //Si el punto es interior a la circunferencia
                             this.setCoordenada_x(this.getCoordenada_x() + this.getDireccion_x());
                             this.setCoordenada_y(this.getCoordenada_y() + this.getDireccion_y());
@@ -176,127 +121,6 @@ public class Bola extends Actor {
         double angle = 0.0;
         Random randNum = new Random(System.currentTimeMillis());
 
-        //	Right side of boundary
-//        if (this.getCoordenada_x() > circ_x) {
-//
-//            //	Quadrant 4
-//            if (this.getCoordenada_y() > circ_y) {
-//
-//                //	Sub Q 13
-//                if (this.getCoordenada_y() - circ_y > Math.sin(3 * Math.PI / 8)) {
-//                    System.out.println("q13");
-//                    angle = (double) (randNum.nextInt(90) + 90);
-//
-//                } //	Sub Q 14
-//                else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 4)) {
-//                    System.out.println("q14");
-//                    angle = (double) (randNum.nextInt(300 - 200 + 1) + 200);
-//
-//                } //	Sub Q 15
-//                else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 8)) {
-//                    System.out.println("q15");
-//                    angle = (double) (randNum.nextInt(265 - 180 + 1) + 180);
-//
-//                } //	Sub Q 16
-//                else {
-//                    System.out.println("q16");
-//                    angle = (double) (randNum.nextInt(220 - 140 + 1) + 140);
-//
-//                }
-//
-//            }//end Quadrant 4
-//            //	Quadrant 1
-//            else {
-//
-//                //	Sub Q 4
-//                if (this.getCoordenada_y() - circ_y < -Math.sin(3 * Math.PI / 8)) {
-//                    System.out.println("q4");
-//                    angle = (double) (randNum.nextInt(30 - 0 + 1) + 0);
-//                    //angle = (double) (randNum.nextInt(130 - 50 + 1) + 50);
-//                    System.out.println("angle: " + angle);
-//
-//                } //	Sub Q 3
-//                else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 4)) {
-//                    System.out.println("q3");
-//                    angle = (double) (randNum.nextInt(45 - 30 + 1) + 30);
-//                    //angle = (double) (randNum.nextInt(175 - 85 + 1) + 85);
-//
-//                } //	Sub Q 2
-//                else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 8)) {
-//                    System.out.println("q2");
-//                    angle = (double) (randNum.nextInt(185 - 105 + 1) + 105);
-//
-//                } //	Sub Q 1
-//                else {
-//                    System.out.println("q1");
-//                    angle = (double) (randNum.nextInt(220 - 140 + 1) + 140);
-//
-//                }
-//            }//end Quadrant 1
-//
-//        }//end right side of boundary
-//        //	Left side of boundary
-//        else {
-//
-//            //	Quadrant 3
-//            if (this.getCoordenada_y() > circ_y) {
-//
-//                //	Sub Q 12
-//                if (this.getCoordenada_y() - circ_y > Math.sin(3 * Math.PI / 8)) {
-//                    System.out.println("q12");
-//                    angle = (double) (randNum.nextInt(225 - 210 + 1) + 210);
-//
-//                } //	Sub Q 11
-//                else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 4)) {
-//                    System.out.println("q11");
-//                    angle = (double) (randNum.nextInt(350 - 270 + 1) + 270);
-//
-//                } //	Sub Q 10
-//                else if (this.getCoordenada_y() - circ_y > Math.sin(Math.PI / 8)) {
-//                    System.out.println("q10");
-//                    angle = (double) (randNum.nextInt(90) - 85);
-//
-//                } //	Sub Q 9
-//                else {
-//                    System.out.println("q9");
-//                    angle = (double) (randNum.nextInt(80) - 40);
-//
-//                }
-//            }//end Quadrant 3
-//            //	Quadrant 2
-//            else {
-//
-//                //	Sub Q 5
-//                if (this.getCoordenada_y() - circ_y < -Math.sin(3 * Math.PI / 8)) {
-//                    System.out.println("q5");
-//                    angle = (double) (randNum.nextInt(130 - 50 + 1) + 50);
-//
-//                } //	Sub Q 6
-//                else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 4)) {
-//                    System.out.println("q6");
-//                    angle = (double) (randNum.nextInt(95 - 5 + 1) + 5);
-//
-//                } //	Sub Q 7
-//                else if (this.getCoordenada_y() - circ_y < -Math.sin(Math.PI / 8)) {
-//                    System.out.println("q7");
-//                    angle = (double) (randNum.nextInt(80));
-//
-//                } //	Sub Q 8
-//                else {
-//                    System.out.println("q8");
-//                    angle = (double) (randNum.nextInt(80) - 40);
-//
-//                }
-//            }//end Quadrant 2
-//
-//        }//end left side of boundary
-//        this.setDireccion_y((int) (speed * Math.sin(Math.toRadians(angle))));
-//        this.setDireccion_x((int) (speed * Math.cos(Math.toRadians(angle))));
-        //end if (changeAngle)
-        /*
-         TODO ESTO es para el rebote si la bola viene BAJANDO.
-         Hay que hacer otro para cuando la bola va SUBIENDO.
-         */
         switch (segmento) {
 
             case S_I: {
@@ -577,6 +401,8 @@ public class Bola extends Actor {
     }
 
     private boolean chocaRaquetaVertical(Model model) {
+        int cenx = this.getCoordenada_x() + radio;
+        int ceny = this.getCoordenada_y() + radio;
         int esquina1_x = this.getCoordenada_x();
         int esquina1_y = this.getCoordenada_y();
         int esquina2_x = this.getCoordenada_x() + radio * 2;
@@ -586,13 +412,23 @@ public class Bola extends Actor {
         int esquina4_x = this.getCoordenada_x() + radio * 2;
         int esquina4_y = this.getCoordenada_y() + radio * 2;
         if ((this.getCoordenada_y() + radio * 2 >= model.getRaqueta().getCoordenada_y() && this.getCoordenada_y() <= model.getRaqueta().getCoordenada_y() + model.getRaqueta().getAltura()) && (this.getCoordenada_x() >= model.getRaqueta().getCoordenada_x() && this.getCoordenada_x() + radio < model.getRaqueta().getCoordenada_x() + model.getRaqueta().getBase())) {
-//            System.out.println("Vertical");
+
             return true;
+        } else if ((model.getRaqueta().interiorRaqueta(esquina1_x, esquina1_y)
+                || model.getRaqueta().interiorRaqueta(esquina2_x, esquina2_y)
+                || model.getRaqueta().interiorRaqueta(esquina3_x, esquina3_y)
+                || model.getRaqueta().interiorRaqueta(esquina4_x, esquina4_y))
+                && ((ceny < model.getRaqueta().getCoordenada_y() || ceny > model.getRaqueta().getCoordenada_y() + model.getRaqueta().getAltura()))
+                && (cenx >= model.getRaqueta().getCoordenada_x() && cenx <= model.getRaqueta().getCoordenada_x() + model.getRaqueta().getBase())) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     private boolean chocaRaquetaHorizontal(Model model) {
+        int cenx = this.getCoordenada_x() + radio;
+        int ceny = this.getCoordenada_y() + radio;
         int esquina1_x = this.getCoordenada_x();
         int esquina1_y = this.getCoordenada_y();
         int esquina2_x = this.getCoordenada_x() + radio * 2;
@@ -602,17 +438,19 @@ public class Bola extends Actor {
         int esquina4_x = this.getCoordenada_x() + radio * 2;
         int esquina4_y = this.getCoordenada_y() + radio * 2;
         if ((this.getCoordenada_x() + this.radio * 2 >= model.getRaqueta().getCoordenada_x() && this.getCoordenada_x() <= model.getRaqueta().getCoordenada_x() + model.getRaqueta().getBase()) && (this.getCoordenada_y() >= model.getRaqueta().getCoordenada_y() && this.getCoordenada_y() + radio < model.getRaqueta().getCoordenada_y() + model.getRaqueta().getAltura())) {
-//            System.out.println("Horizontal");
+
             return true;
-        } //else if (model.getRaqueta().interiorRaqueta(esquina1_x, esquina1_y)
-//                || model.getRaqueta().interiorRaqueta(esquina2_x, esquina2_y)
-//                || model.getRaqueta().interiorRaqueta(esquina3_x, esquina3_y)
-//                || model.getRaqueta().interiorRaqueta(esquina4_x, esquina4_y)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-return false;
+        } else if ((model.getRaqueta().interiorRaqueta(esquina1_x, esquina1_y)
+                || model.getRaqueta().interiorRaqueta(esquina2_x, esquina2_y)
+                || model.getRaqueta().interiorRaqueta(esquina3_x, esquina3_y)
+                || model.getRaqueta().interiorRaqueta(esquina4_x, esquina4_y))
+                && ((ceny >= model.getRaqueta().getCoordenada_y() && ceny <= model.getRaqueta().getCoordenada_y() + model.getRaqueta().getAltura()))
+                && (cenx < model.getRaqueta().getCoordenada_x() || cenx > model.getRaqueta().getCoordenada_x() + model.getRaqueta().getBase())) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     private boolean interior(int x1, int y1, int x2, int y2, Model model) {
