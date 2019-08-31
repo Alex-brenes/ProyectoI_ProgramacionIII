@@ -7,6 +7,10 @@
 
 package dodgeball;
 
+import dodgeball.presentacion.Controller;
+import dodgeball.presentacion.View;
+import dodgeball.presentacion.Model;
+
 public class DodgeBall {
 
     public static void main(String[] args) throws InterruptedException {
