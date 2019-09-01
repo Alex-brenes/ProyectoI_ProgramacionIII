@@ -33,6 +33,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     public View() {
         super("Dodge Ball");
+        super.setIconImage(java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/icon.png")));
         fondo = new dodgeball.logic.Musica();
         fondo.reproducirMusica();
         bf = new java.awt.image.BufferedImage(WIDTH, HEIGHT, java.awt.image.BufferedImage.TYPE_INT_RGB);
@@ -119,9 +120,11 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         });
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (0 < model.getHud().getBolasRestantes()) {
-                    model.agregarBola(e.getX(), e.getY());
-                    model.getHud().reducirBolas();
+                if(!model.getRaqueta().interiorRaqueta(e.getX(), e.getY())){
+                    if (0 < model.getHud().getBolasRestantes()) {
+                        model.agregarBola(e.getX(), e.getY());
+                        model.getHud().reducirBolas();
+                    }
                 }
             }
         });

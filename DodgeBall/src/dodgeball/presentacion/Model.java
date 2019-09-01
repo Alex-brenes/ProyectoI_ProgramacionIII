@@ -23,7 +23,7 @@ public class Model extends Observable {
     public Model() {
         this.raqueta = new Raqueta(246, 451, 0, 0, 100, 40);
         this.lista_bolas = new ArrayList<Bola>();
-        lista_bolas.add(new Bola(/*120*/360, 290, 7, 7));
+        lista_bolas.add(new Bola(120, 290, 7, 7));
         this.circunferencia = new Circunferencia(45, 80, 250);
         hud = new HUD(Bola.speed);
     }
@@ -94,34 +94,42 @@ public class Model extends Observable {
 
     public void agregarBola(int x, int y) {
         try {
-            if(this.raqueta.interiorRaqueta(x, y)){
-                throw new Exception();
-            }else{
-                
-                Bola nueva = new Bola(x, y, 0, 0);
-                int xc = this.circunferencia.centro_x();
-                int yc = this.circunferencia.centro_y();
-                if (Math.sqrt(((x - xc) * (x - xc)) + ((y - yc) * (y - yc))) < this.circunferencia.getRadio() - Bola.radio * 3) {
-                    //Se toma la velocidad de la bola anterior
-                    int bolAnt_x = lista_bolas.get(lista_bolas.size() - 1).getDireccion_x();
-                    int bolAnt_y = lista_bolas.get(lista_bolas.size() - 1).getDireccion_y();
-                    if (bolAnt_y < 0) {
-                        bolAnt_y *= (-1);
-                    }
-                    if (bolAnt_x < 0) {
-                        bolAnt_x *= (-1);
-                    }
-                    switch (nueva.segmento(circunferencia)) {
-                        case Bola.S_I: nueva.setDireccion_x((-1) * bolAnt_x); nueva.setDireccion_y(bolAnt_y); break;
-                        case Bola.S_II: nueva.setDireccion_x(bolAnt_x); nueva.setDireccion_y(bolAnt_y); break;
-                        case Bola.S_III: nueva.setDireccion_x(bolAnt_x); nueva.setDireccion_y((-1) * bolAnt_y); break;
-                        case Bola.S_IV: nueva.setDireccion_x((-1) * bolAnt_x); nueva.setDireccion_y((-1) * bolAnt_y); break;
-                    }
-                    this.lista_bolas.add(nueva);
 
-                } else {
-                    throw new Exception();
+            Bola nueva = new Bola(x, y, 0, 0);
+            int xc = this.circunferencia.centro_x();
+            int yc = this.circunferencia.centro_y();
+            if (Math.sqrt(((x - xc) * (x - xc)) + ((y - yc) * (y - yc))) < this.circunferencia.getRadio() - Bola.radio * 3) {
+                //Se toma la velocidad de la bola anterior
+                int bolAnt_x = lista_bolas.get(lista_bolas.size() - 1).getDireccion_x();
+                int bolAnt_y = lista_bolas.get(lista_bolas.size() - 1).getDireccion_y();
+                if (bolAnt_y < 0) {
+                    bolAnt_y *= (-1);
                 }
+                if (bolAnt_x < 0) {
+                    bolAnt_x *= (-1);
+                }
+                switch (nueva.segmento(circunferencia)) {
+                    case Bola.S_I:
+                        nueva.setDireccion_x((-1) * bolAnt_x);
+                        nueva.setDireccion_y(bolAnt_y);
+                        break;
+                    case Bola.S_II:
+                        nueva.setDireccion_x(bolAnt_x);
+                        nueva.setDireccion_y(bolAnt_y);
+                        break;
+                    case Bola.S_III:
+                        nueva.setDireccion_x(bolAnt_x);
+                        nueva.setDireccion_y((-1) * bolAnt_y);
+                        break;
+                    case Bola.S_IV:
+                        nueva.setDireccion_x((-1) * bolAnt_x);
+                        nueva.setDireccion_y((-1) * bolAnt_y);
+                        break;
+                }
+                this.lista_bolas.add(nueva);
+
+            } else {
+                throw new Exception();
             }
 
         } catch (Exception ex) {
