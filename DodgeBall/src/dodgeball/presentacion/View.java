@@ -14,7 +14,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
@@ -120,7 +119,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         });
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                System.out.println(model.getHud().getBolasRestantes());
                 if (0 < model.getHud().getBolasRestantes()) {
                     model.agregarBola(e.getX(), e.getY());
                     model.getHud().reducirBolas();
@@ -219,7 +217,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     public void update(java.util.Observable sujeto, Object objeto) {
         for (Bola b : model.getListaBolas()) {
             switch(b.punto){
-                case 0: break; //otro sonido
+                case 0: break;
                 case 1: this.gana.setFramePosition(0); this.gana.start(); this.model.getHud().aumentarPuntaje(); b.punto = 0; break;
                 case 2: this.pierde.setFramePosition(0); this.pierde.start(); this.model.getHud().reducirPuntaje(); b.punto = 0; break;
             }
@@ -305,17 +303,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         }
     }
 
-    private void dibujarBola(Bola bola, java.awt.Graphics graphics) {
-
-        graphics.setColor(java.awt.Color.BLUE);
-        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y());
-        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y(), bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2);
-        graphics.drawLine(bola.getCoordenada_x(), bola.getCoordenada_y() + bola.getRadio() * 2, bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
-        graphics.drawLine(bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y(), bola.getCoordenada_x() + bola.getRadio() * 2, bola.getCoordenada_y() + bola.getRadio() * 2);
-
-        //graphics.drawLine(bola.getCoordenada_x() + bola.getRadio(), bola.getCoordenada_y() + bola.getRadio(), 295, 330);
+    private void dibujarBola(Bola bola, java.awt.Graphics graphics) {        
         graphics.drawImage(ballImage, bola.getCoordenada_x(), bola.getCoordenada_y(), this);
-
     }
 
     private void dibujarRaqueta(Raqueta raqueta, java.awt.Graphics graphics) {

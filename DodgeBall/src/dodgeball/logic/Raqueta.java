@@ -81,16 +81,12 @@ public class Raqueta extends Actor {
         int r = c.getRadio();
         //Se determina el segmento en el que se encuentra la bola;
         if ((xr > x + r && xr < x + 2 * r) && (yr > y && yr < y + r)) { //Segmento I
-//            System.out.println("RAQUETA: SEGMENTO I");
             return S_I;
         } else if ((xr > x && xr < x + r) && (yr > y && yr < y + r)) { //Segemento II 
-//            System.out.println("RAQUETA: SEGMENTO II");
             return S_II;
         } else if ((xr > x && xr < x + r) && (yr > y + r && yr < y + 2 * r)) { //Segmento III
-//            System.out.println("RAQUETA: SEGMENTO III");
             return S_III;
         } else if ((xr > x + r && xr < x + 2 * r) && (yr > y + r && yr < y + 2 * r)) { //Segmento IV
-//            System.out.println("RAQUETA: SEGMENTO IV");
             return S_IV;
         }
 
@@ -119,7 +115,7 @@ public class Raqueta extends Actor {
     }
 
     public boolean interiorRaqueta(int x, int y) {
-        return (y >= this.getCoordenada_y()  && y <= this.getCoordenada_y() + this.altura) && (x >= this.getCoordenada_x() && x <= this.getCoordenada_x() + this.getBase());
+        return (y >= this.getCoordenada_y() && y <= this.getCoordenada_y() + this.altura) && (x >= this.getCoordenada_x() && x <= this.getCoordenada_x() + this.getBase());
     }
 
     private final int S_I = 0;

@@ -8,10 +8,6 @@ package dodgeball.logic;
 import dodgeball.presentacion.Model;
 import java.util.Random;
 
-/**
- *
- * @author pc
- */
 public class Bola extends Actor {
 
     public static int radio;
@@ -125,8 +121,9 @@ public class Bola extends Actor {
         switch (segmento) {
 
             case S_I: {
-                System.out.println("DIRECCION Y: " + this.getDireccion_y());
+                System.out.println("Theta: " + theta);
                 if (this.getDireccion_y() < 0) { //Si la bola está subiendo
+                    System.out.println("Sube");
                     if (0 <= theta && theta < 30) { // Si se encuentra entre los ángulos 0 y 30
                         angulo_inf = 180;
                         angulo_sup = 210;
@@ -136,8 +133,8 @@ public class Bola extends Actor {
                         }
 
                     } else if (30 <= theta && theta < 45) { // Si se encuentra entre los ángulos 30 y 45
-                        angulo_inf = 210;
-                        angulo_sup = 220; //CON 225 SE SALE
+                        angulo_inf = 200;
+                        angulo_sup = 210; //CON 225 SE SALE
                         System.out.println("30 a 45\n\tangulo = " + angle);
                         punto = 2;
 
@@ -148,7 +145,7 @@ public class Bola extends Actor {
                         System.out.println("45 a 60\n\tangulo = " + angle);
                         punto = 2;
 
-                    } else if (60 <= theta && theta < 90) { // Si se encuentra entre los ángulos 60 y 90
+                    } else if (60 <= theta && theta < 91) { // Si se encuentra entre los ángulos 60 y 90
                         //ESTOS YA NO SIGUEN LOS ÁNGULOS PARA EVITAR QUE SE SALGA LA BOLA
                         angulo_inf = 135;
                         angulo_sup = 150;
@@ -179,7 +176,7 @@ public class Bola extends Actor {
                         System.out.println("45 a 60\n\tangulo = " + angle);
                         punto = 2;
 
-                    } else if (60 <= theta && theta < 90) { // Si se encuentra entre los ángulos 60 y 90
+                    } else if (60 <= theta && theta < 91) { // Si se encuentra entre los ángulos 60 y 90
                         angulo_inf = 90;
                         angulo_sup = 120;
                         System.out.println("60 a 90\n\tangulo = " + angle);
@@ -198,7 +195,8 @@ public class Bola extends Actor {
 
             case S_II: {
                 if (this.getDireccion_y() < 0) { //Si la bola está subiendo
-                    if (90 <= theta && theta < 120) { // Si se encuentra entre los ángulos 90 y 120
+                    System.out.println("Sube");
+                    if (89 <= theta && theta < 120) { // Si se encuentra entre los ángulos 90 y 120
                         angulo_inf = 60;
                         angulo_sup = 90;
                         System.out.println("90 a 120\n\tangulo = ");
@@ -206,18 +204,18 @@ public class Bola extends Actor {
                             punto = 1;
                         }
 
-                    } else if (120 <= theta && theta < 135) { // Si se encuentra entre los ángulos 30 y 45
-                        angulo_inf = 340;
-                        angulo_sup = 350;
+                    } else if (120 <= theta && theta < 135) { 
+                        angulo_inf = 345;
+                        angulo_sup = 355;
                         System.out.println("120 a 135\n\tangulo = ");
                         punto = 2;
 
-                    } else if (135 <= theta && theta < 150) { // Si se encuentra entre los ángulos 45 y 60
-                        angulo_inf = 320;
-                        angulo_sup = 330;
+                    } else if (135 <= theta && theta < 150) { 
+                        angulo_inf = 340;
+                        angulo_sup = 350;
                         System.out.println("135 a 150\n\tangulo = ");
                         punto = 2;
-                    } else if (150 <= theta && theta < 180) { // Si se encuentra entre los ángulos 60 y 90
+                    } else if (150 <= theta && theta < 180) { 
                         angulo_inf = 330;
                         angulo_sup = 360;
                         System.out.println("150 a 180\n\tangulo = ");
@@ -228,24 +226,24 @@ public class Bola extends Actor {
                 } else {
                     System.out.println("Theta: " + theta);
 
-                    if (90 <= theta && theta < 120) { // Si se encuentra entre los ángulos 90 y 120
+                    if (89 <= theta && theta < 120) { 
                         angulo_inf = 60;
                         angulo_sup = 90;
                         System.out.println("90 a 120\n\tangulo = ");
                         if (theta <= 105) {
                             punto = 1;
                         }
-                    } else if (120 <= theta && theta < 135) { // Si se encuentra entre los ángulos 30 y 45
+                    } else if (120 <= theta && theta < 135) {
                         angulo_inf = 45;
                         angulo_sup = 60;
                         System.out.println("120 a 135\n\tangulo = ");
                         punto = 2;
-                    } else if (135 <= theta && theta < 150) { // Si se encuentra entre los ángulos 45 y 60
+                    } else if (135 <= theta && theta < 150) { 
                         angulo_inf = 30;
                         angulo_sup = 45;
                         System.out.println("135 a 150\n\tangulo = ");
                         punto = 2;
-                    } else if (150 <= theta && theta < 180) { // Si se encuentra entre los ángulos 60 y 90
+                    } else if (150 <= theta && theta < 180) { 
                         angulo_inf = 0;
                         angulo_sup = 30;
                         System.out.println("150 a 180\n\tangulo = ");
@@ -263,8 +261,9 @@ public class Bola extends Actor {
                 theta *= (-1);
                 theta = 360 - theta;
                 System.out.println("theta: " + theta);
-                if (this.getDireccion_y() < 0) { //Si sube
-                    if (180 <= theta && theta < 210) { // Si se encuentra entre los ángulos 0 y 30
+                if (this.getDireccion_y() < 0) { 
+                    System.out.println("Sube");
+                    if (180 <= theta && theta < 210) { 
                         angulo_inf = 330;
                         angulo_sup = 350;
                         System.out.println("180 a 210\n\tangulo = ");
@@ -272,17 +271,17 @@ public class Bola extends Actor {
                             punto = 1;
                         }
 
-                    } else if (210 <= theta && theta < 225) { // Si se encuentra entre los ángulos 30 y 45
+                    } else if (210 <= theta && theta < 225) { 
                         angulo_inf = 315;
                         angulo_sup = 330;
                         System.out.println("210 a 225\n\tangulo = ");
                         punto = 2;
-                    } else if (225 <= theta && theta < 240) { // Si se encuentra entre los ángulos 45 y 60
+                    } else if (225 <= theta && theta < 240) { 
                         angulo_inf = 300;
                         angulo_sup = 315;
                         System.out.println("225 a 240\n\tangulo = ");
                         punto = 2;
-                    } else if (240 <= theta && theta < 270) { // Si se encuentra entre los ángulos 60 y 90
+                    } else if (240 <= theta && theta < 270) { 
                         angulo_inf = 270;
                         angulo_sup = 300;
                         System.out.println("240 a 270\n\tangulo = ");
@@ -292,7 +291,7 @@ public class Bola extends Actor {
                     }
                 } else {
 
-                    if (180 <= theta && theta < 210) { // Si se encuentra entre los ángulos 0 y 30
+                    if (180 <= theta && theta < 210) { 
                         angulo_inf = 0;
                         angulo_sup = 30;
                         System.out.println("180 a 210\n\tangulo = ");
@@ -300,17 +299,17 @@ public class Bola extends Actor {
                             punto = 1;
                         }
 
-                    } else if (210 <= theta && theta < 225) { // Si se encuentra entre los ángulos 30 y 45
+                    } else if (210 <= theta && theta < 225) { 
                         angulo_inf = 10;
                         angulo_sup = 30;
                         System.out.println("210 a 225\n\tangulo = ");
                         punto = 2;
-                    } else if (225 <= theta && theta < 240) { // Si se encuentra entre los ángulos 45 y 60
-                        angulo_inf = 25;
-                        angulo_sup = 30;
+                    } else if (225 <= theta && theta < 240) { 
+                        angulo_inf = 15;
+                        angulo_sup = 20;
                         System.out.println("225 a 240\n\tangulo = ");
                         punto = 2;
-                    } else if (240 <= theta && theta < 270) { // Si se encuentra entre los ángulos 60 y 90
+                    } else if (240 <= theta && theta <= 270) {
                         angulo_inf = 270;
                         angulo_sup = 300;
                         System.out.println("240 a 270\n\tangulo = ");
@@ -325,12 +324,13 @@ public class Bola extends Actor {
                 break;
             }
             case S_IV: {
+                
                 theta *= (-1);
                 theta = 360 - theta;
                 System.out.println(theta);
-                if (this.getDireccion_y() < 0) {//Si sube
-
-                    if (270 <= theta && theta < 300) { // Si se encuentra entre los ángulos 0 y 30
+                if (this.getDireccion_y() < 0) {
+System.out.println("Sube");
+                    if (269 <= theta && theta < 300) {
                         angulo_inf = 315;
                         angulo_sup = 330;
                         System.out.println("270 a 300\n\tangulo = ");
@@ -338,19 +338,19 @@ public class Bola extends Actor {
                             punto = 1;
                         }
 
-                    } else if (300 <= theta && theta < 315) { // Si se encuentra entre los ángulos 30 y 45
+                    } else if (300 <= theta && theta < 315) { 
                         angulo_inf = 225;
                         angulo_sup = 240;
                         System.out.println("300 a 315\n\tangulo = ");
                         punto = 2;
 
-                    } else if (315 <= theta && theta < 330) { // Si se encuentra entre los ángulos 45 y 60
+                    } else if (315 <= theta && theta < 330) { 
                         angulo_inf = 135;
                         angulo_sup = 150;
                         System.out.println("315 a 330\n\tangulo = ");
 
                         punto = 2;
-                    } else if (330 <= theta && theta < 360) { // Si se encuentra entre los ángulos 60 y 90
+                    } else if (330 <= theta && theta < 360) {
                         angulo_inf = 180;
                         angulo_sup = 210;
                         System.out.println("330 a 360\n\tangulo = ");
@@ -361,26 +361,26 @@ public class Bola extends Actor {
                     }
 
                 } else { //Si baja
-                    if (270 <= theta && theta < 300) { // Si se encuentra entre los ángulos 0 y 30
+                    if (269 <= theta && theta < 300) { 
                         angulo_inf = 240;
-                        angulo_sup = 270;
+                        angulo_sup = 265;
                         System.out.println("270 a 300\n\tangulo = ");
                         if (theta <= 285) {
                             punto = 1;
                         }
 
-                    } else if (300 <= theta && theta < 315) { // Si se encuentra entre los ángulos 30 y 45
-                        angulo_inf = 160;
+                    } else if (300 <= theta && theta < 315) { 
+                        angulo_inf = 165;
                         angulo_sup = 170;
                         System.out.println("300 a 315\n\tangulo = ");
                         punto = 2;
-                    } else if (315 <= theta && theta < 330) { // Si se encuentra entre los ángulos 45 y 60
+                    } else if (315 <= theta && theta < 330) {
                         angulo_inf = 150;
                         angulo_sup = 180;
                         System.out.println("315 a 330\n\tangulo = ");
                         punto = 2;
-                    } else if (330 <= theta && theta < 360) { // Si se encuentra entre los ángulos 60 y 90
-                        angulo_inf = 135;
+                    } else if (330 <= theta && theta < 360) { 
+                        angulo_inf = 140;
                         angulo_sup = 150;
                         System.out.println("330 a 360\n\tangulo = ");
                         if (theta >= 345) {
@@ -418,9 +418,11 @@ public class Bola extends Actor {
         } else if ((model.getRaqueta().interiorRaqueta(esquina1_x, esquina1_y)
                 || model.getRaqueta().interiorRaqueta(esquina2_x, esquina2_y)
                 || model.getRaqueta().interiorRaqueta(esquina3_x, esquina3_y)
-                || model.getRaqueta().interiorRaqueta(esquina4_x, esquina4_y))
-                && ((ceny < model.getRaqueta().getCoordenada_y() || ceny > model.getRaqueta().getCoordenada_y() + model.getRaqueta().getAltura()))
-                && (cenx >= model.getRaqueta().getCoordenada_x() && cenx <= model.getRaqueta().getCoordenada_x() + model.getRaqueta().getBase())) {
+                || model.getRaqueta().interiorRaqueta(esquina4_x, esquina4_y)) 
+                && (
+                ceny < model.getRaqueta().getCoordenada_y()
+                || 
+                ceny > model.getRaqueta().getCoordenada_y() + model.getRaqueta().getAltura())) {
             return true;
         } else {
             return false;
@@ -429,7 +431,6 @@ public class Bola extends Actor {
 
     private boolean chocaRaquetaHorizontal(Model model) {
         int cenx = this.getCoordenada_x() + radio;
-        int ceny = this.getCoordenada_y() + radio;
         int esquina1_x = this.getCoordenada_x();
         int esquina1_y = this.getCoordenada_y();
         int esquina2_x = this.getCoordenada_x() + radio * 2;
@@ -445,8 +446,10 @@ public class Bola extends Actor {
                 || model.getRaqueta().interiorRaqueta(esquina2_x, esquina2_y)
                 || model.getRaqueta().interiorRaqueta(esquina3_x, esquina3_y)
                 || model.getRaqueta().interiorRaqueta(esquina4_x, esquina4_y))
-                && ((ceny >= model.getRaqueta().getCoordenada_y() && ceny <= model.getRaqueta().getCoordenada_y() + model.getRaqueta().getAltura()))
-                && (cenx < model.getRaqueta().getCoordenada_x() || cenx > model.getRaqueta().getCoordenada_x() + model.getRaqueta().getBase())) {
+                && (
+                cenx < model.getRaqueta().getCoordenada_x()
+                || 
+                cenx > model.getRaqueta().getCoordenada_x() + model.getRaqueta().getBase())) {
             return true;
         } else {
             return false;
